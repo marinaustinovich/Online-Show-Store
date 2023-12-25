@@ -1,73 +1,77 @@
 .footer {
-    padding: 0 25px;
-  }
-  
-  .footer-pay {
+  padding: 0 25px;
+  &-pay {
     display: flex;
     justify-content: space-between;
     margin: 12px auto 0;
+
+    &-systems {
+      width: 46px;
+      height: 28px;
+      border: 2px solid #ffffff;
+      border-radius: 8px;
+      background-color: #ffffff;
+      background-repeat: no-repeat;
+      background-image: url("../../../../public/img/footer-sprite.png");
+      &-paypal {
+        background-position: -2px -6px;
+      }
+      &-master-card {
+        background-position: -54px -8px;
+      }
+      &-visa {
+        background-position: -104px -8px;
+      }
+      &-yandex {
+        background-position: -154px -8px;
+      }
+      &-webmoney {
+        background-position: -2px -46px;
+      }
+      &-qiwi {
+        background-position: -52px -46px;
+      }
+    }
+    &-systems:not(:first-child) {
+      margin-left: 5px;
+    }
   }
-  .footer-pay-systems {
-    width: 46px;
-    height: 28px;
-    border: 2px solid #ffffff;
-    border-radius: 8px;
-    background-color: #ffffff;
-    background-repeat: no-repeat;
-    background-image: url('../../../../public/img/footer-sprite.png');
+
+  &-social {
+    &-links {
+      margin-top: 10px;
+    }
+    &-link {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      margin: 0 5px;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-image: url("../../../../public/img/footer-sprite.png");
+    }
+    &-link-twitter {
+      background-position: -107px -42px;
+    }
+    &-link-vk {
+      background-position: -157px -42px;
+    }
+    &-link:hover {
+      cursor: pointer;
+    }
   }
-  .footer-pay-systems:not(:first-child) {
-    margin-left: 5px;
-  }
-  .footer-pay-systems-paypal {
-    background-position: -2px -6px;
-  }
-  .footer-pay-systems-master-card {
-    background-position: -54px -8px;
-  }
-  .footer-pay-systems-visa {
-    background-position: -104px -8px;
-  }
-  .footer-pay-systems-yandex {
-    background-position: -154px -8px;
-  }
-  .footer-pay-systems-webmoney {
-    background-position: -2px -46px;
-  }
-  .footer-pay-systems-qiwi {
-    background-position: -52px -46px;
-  }
-  
-  .footer-social-links {
-    margin-top: 10px;
-  }
-  .footer-social-link {
-    display: inline-block;
-    width: 36px;
-    height: 36px;
-    margin: 0 5px;
-    border-radius: 50%;
-    background-repeat: no-repeat;
-    background-image: url('../../../../public/img/footer-sprite.png');
-  }
-  .footer-social-link-twitter {
-    background-position: -107px -42px;
-  }
-  .footer-social-link-vk {
-    background-position: -157px -42px;
-  }
-  .footer-social-link:hover {
-    cursor: pointer;
-  }
-  
-  .footer-copyright {
+
+  &-copyright {
     font-size: 0.8em;
   }
-  
-  .footer-contacts-phone {
-    display: block;
+
+  &-contacts {
+    &-phone {
+      display: block;
+    }
+
+    &-email {
+      display: block;
+    }
   }
-  
-  .footer-contacts-email {
-    display: block;
-  }
+}

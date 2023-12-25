@@ -7,16 +7,25 @@ import MainPage from "pages/main-page/main-page";
 import AboutPage from "pages/about-page/about-page";
 import ContactsPage from "pages/contacts-page/contacts-page";
 import CatalogPage from "pages/catalog-page/catalog-page";
+import { Wrapper } from "components/common";
+import { Banner } from "../banner";
 
 export const App = () => (
-  <div>
+  <>
     <Header />
-    <Routes>
-      <Route path="/" element={<MainPage />} />
-      <Route path="/catalog/" element={<CatalogPage />} />
-      <Route path="/about/" element={<AboutPage />} />
-      <Route path="/contacts/" element={<ContactsPage />} />
-    </Routes>
+
+    <main className="container">
+      <Wrapper>
+        <Banner />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/catalog/" element={<CatalogPage />} />
+          <Route path="/about/" element={<AboutPage />} />
+          <Route path="/contacts/" element={<ContactsPage />} />
+        </Routes>
+      </Wrapper>
+    </main>
+
     <Footer />
-  </div>
+  </>
 );

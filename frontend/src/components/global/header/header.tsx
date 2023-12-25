@@ -2,12 +2,15 @@ import { classname } from "utils";
 
 import "./header.scss";
 import { Navbar } from "./navbar";
+import Wrapper from "components/common/wrapper/wrapper";
 
-const cn = classname("header");
+const cn = classname("container");
 
 export const Header = () => (
   <header className={cn()}>
-    <Navbar />
+    <Wrapper>
+      <Navbar />
+    </Wrapper>
   </header>
 );
 
