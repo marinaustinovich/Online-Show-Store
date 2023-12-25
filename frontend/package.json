@@ -1,0 +1,77 @@
+{
+  "name": "online-shoe-store",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@bem-react/classname": "^1.6.0",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/node": "^20.6.2",
+    "@types/react": "^18.2.21",
+    "@types/react-datepicker": "^4.15.0",
+    "@types/react-dom": "^18.2.7",
+    "@types/react-select": "^5.0.1",
+    "axios": "^1.5.0",
+    "date-fns": "^2.30.0",
+    "debounce": "^1.2.1",
+    "i18next": "^23.5.1",
+    "i18next-browser-languagedetector": "^7.1.0",
+    "js-convert-case": "^4.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-final-form": "^6.5.9",
+    "react-i18next": "^13.2.2",
+    "react-redux": "^8.1.2",
+    "react-router-dom": "^6.16.0",
+    "react-scripts": "5.0.1",
+    "redux-persist": "^6.0.0",
+    "typescript": "^4.9.5",
+    "uuid": "^9.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/debounce": "^1.2.2",
+    "@types/uuid": "^9.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "css-loader": "^6.8.1",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-dirnames": "^1.0.3",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-unicorn": "^48.0.1",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "postcss-less": "^6.0.0",
+    "prettier": "^3.0.3",
+    "sass": "^1.67.0"
+  }
+}

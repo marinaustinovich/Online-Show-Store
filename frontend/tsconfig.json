@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "baseUrl": "./src",
+        "paths": {
+            "@api": ["api/index"],
+            "@hooks": ["hooks/index"],
+            "@components": ["components/index"],
+            "@fields": ["fields/index"],
+            "@store": ["store/index"],
+            "@store/*": ["store/*"],
+            "@types/*": ["types/*"],
+            "@utils": ["utils/index"],
+            "@icons": ["icons/index"],
+            "@validators": ["validators/index"],
+            "@/*": ["/*"]
+        }
+    },
+    "include": ["**/*.ts", "**/*.tsx", "src/index.tsx", "**/*.d.ts", "src/components/common/interactive-carriage-map/carriage-map/carriage-map.tsx"],
+    "exclude": ["node_modules"]
+}
