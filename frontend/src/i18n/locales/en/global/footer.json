@@ -1,3 +1,19 @@
 {
-   
+  "navigation": {
+    "title": "Information",
+    "catalog-label": "Catalog",
+    "about-store-label": "About the store",
+    "contacts-label": "Contacts"
+  },
+  "contacts": {
+    "title": "Contacts:",
+    "phone": "  +7 495 79 03 5 03",
+    "working-hours": "Daily: from 09-00 to 21-00",
+    "email": " office@bosanoga.ru"
+  },
+  "payment-copyright": {
+    "title": "We accept payment:",
+    "copyright": "2009-2019 © BosaNoga.ru - fashionable online store of shoes and accessories. All rights reserved.",
+    "delivery": "Delivery throughout Russia!"
+  }
 }

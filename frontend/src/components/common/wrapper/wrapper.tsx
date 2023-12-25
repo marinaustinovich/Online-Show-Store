@@ -3,10 +3,8 @@ import { ReactNode } from "react";
 type Props = {
   children: ReactNode;
 };
+
 export const Wrapper = ({ children }: Props) => (
-  <div className="row">
-    <div className="col">{children}</div>
-  </div>
+  <div className="row">{children}</div>
 );
 
-export default Wrapper;
