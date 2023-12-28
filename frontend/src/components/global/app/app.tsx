@@ -7,6 +7,7 @@ import MainPage from "pages/main-page/main-page";
 import AboutPage from "pages/about-page/about-page";
 import ContactsPage from "pages/contacts-page/contacts-page";
 import CatalogPage from "pages/catalog-page/catalog-page";
+import ErrorPage from "pages/404-page/404-page";
 import { Column, Wrapper } from "components/common";
 import { Banner } from "../banner";
 
@@ -23,6 +24,7 @@ export const App = () => (
             <Route path="/catalog/" element={<CatalogPage />} />
             <Route path="/about/" element={<AboutPage />} />
             <Route path="/contacts/" element={<ContactsPage />} />
+            <Route path="/404-page/" element={<ErrorPage />} />
           </Routes>
         </Column>
       </Wrapper>
