@@ -7,3 +7,4 @@ export * from "./wrapper";
 export * from "./column";
 export * from "./top-sales-section";
 export * from "./title";
+export * from "./ordered-list";
