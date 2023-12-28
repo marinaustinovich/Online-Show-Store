@@ -1,3 +1,9 @@
 {
-    "banner": "Ready for spring!"
+  "banner": "Ready for spring!",
+  "best": {
+    "title": "Best sellers!"
+  },
+  "catalog": {
+    "title": "Catalog"
+  }
 }

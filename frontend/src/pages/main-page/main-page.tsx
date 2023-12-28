@@ -1,13 +1,21 @@
-import React from 'react';
-import { classname } from 'utils';
+import { Preloader, Title, TopSalesSection } from "components";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
+const MainPage = () => {
+  const { t } = useTranslation("global");
 
-const cn = classname('main-page');
-
-const MainPage = () => (
-    <div className={cn()}>
-        main
-    </div>
-);
-
+  return (
+    <>
+      <TopSalesSection>
+        <Title text={t("main.best.title")} />
+        <Preloader />
+      </TopSalesSection>
+      <section className="catalog">
+        <Title text={t("main.catalog.title")} />
+        <Preloader />
+      </section>
+    </>
+  );
+};
 export default MainPage;
