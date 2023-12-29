@@ -32,17 +32,10 @@ section {
 
 
 /* Catalog */
-.catalog {
-  min-height: 600px;
-}
 
 .catalog-categories {
   font-size: 1.3rem;
   margin-bottom: 2em;
-}
-
-.catalog-item-card {
-  margin-bottom: 1em;
 }
 
 .catalog-item-size {
@@ -87,12 +80,3 @@ h2,
   margin-top: 2em;
 }
 
-.btn-outline-primary {
-  color: #727e86;
-  border-color: #727e86;
-}
-
-.btn-outline-primary:hover {
-  background-color: #727e86;
-  border-color: #727e86;
-}
