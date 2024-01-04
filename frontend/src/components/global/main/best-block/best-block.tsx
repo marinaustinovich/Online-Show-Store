@@ -19,7 +19,7 @@ export const BestBlock = () => {
   useEffect(() => {
     dispatch(fetchTopSalesAction());
   }, [dispatch]);
-  console.log(topSalesStatus);
+
   const showComponent = useMemo(
     () =>
       topSalesStatus === RequestStatus.PROCESSING ||
