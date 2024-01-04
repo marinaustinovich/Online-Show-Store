@@ -38,7 +38,7 @@ const requestPending = (wasCalled: boolean | undefined = false): RequestWithStat
     wasCalled,
 });
 
-const requestSuccess = <D>(data: D): RequestWithStatus<D> => ({
+export const requestSuccess = <D>(data: D): RequestWithStatus<D> => ({
     status: RequestStatus.SUCCESS,
     error: null,
     data,

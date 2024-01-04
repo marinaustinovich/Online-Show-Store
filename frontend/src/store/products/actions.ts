@@ -1,21 +1,29 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { FetchedTopSale, fetchProduct, fetchTopSales } from "api";
+import {
+  ProductItem,
+  ItemsFilters,
+  fetchItems,
+  fetchProduct,
+  fetchTopSales,
+  fetchCategories,
+  Category,
+} from "api";
+import { productsActions } from "./slice";
 
-export const fetchTopSalesAction = createAsyncThunk<FetchedTopSale[], void>(
+export const fetchTopSalesAction = createAsyncThunk<ProductItem[], void>(
   "products/fetchTopSales",
-  async (_, { rejectWithValue, dispatch }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const result = await fetchTopSales();
 
       return result;
     } catch (error) {
-        console.error("Error fetching Top Sales", error);
+      console.error("Error fetching Top Sales", error);
       return rejectWithValue(error);
     }
   }
 );
-
 
 export const fetchProductAction = createAsyncThunk<any, string>(
   "products/fetchProduct",
@@ -28,4 +36,28 @@ export const fetchProductAction = createAsyncThunk<any, string>(
   }
 );
 
+export const fetchItemsAction = createAsyncThunk<ProductItem[], ItemsFilters>(
+  "products/fetchItems",
+  async (data, { rejectWithValue }) => {
+    try {
+      return await fetchItems(data);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
+export const fetchCategoriesAction = createAsyncThunk<Category[], void>(
+  "products/fetchCategories",
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      const result = await fetchCategories();
+      console.log(result);
+      dispatch(productsActions.setCategories(result));
+      return result;
+    } catch (error) {
+      console.error("Error fetching categories", error);
+      return rejectWithValue(error);
+    }
+  }
+);

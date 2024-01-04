@@ -2,7 +2,7 @@ import { axios } from "utils";
 
 type Image = string;
 
-export type FetchedTopSale = {
+export type ProductItem = {
   category: number;
   id: number;
   images: Image[];
@@ -13,5 +13,5 @@ export type FetchedTopSale = {
 export const fetchTopSales = async () => {
   const result = await axios.get("/top-sales");
 
-  return result.data as FetchedTopSale[];
+  return result.data as ProductItem[];
 };
