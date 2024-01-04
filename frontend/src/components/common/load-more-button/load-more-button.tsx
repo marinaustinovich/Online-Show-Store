@@ -21,6 +21,7 @@ export const LoadMoreButton = ({ onClick, isLoading }: Props) => {
       {isLoading && <Preloader />}
       <button
         className={cn("", [cn("outline-primary")])}
+        disabled={isLoading}
         onClick={handleOnClick}
       >
         {t("commons.load-more-btn-label")}

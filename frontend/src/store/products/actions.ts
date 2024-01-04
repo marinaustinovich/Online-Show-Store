@@ -40,7 +40,9 @@ export const fetchItemsAction = createAsyncThunk<ProductItem[], ItemsFilters>(
   "products/fetchItems",
   async (data, { rejectWithValue }) => {
     try {
-      return await fetchItems(data);
+      const result = await fetchItems(data);
+
+      return result;
     } catch (error) {
       return rejectWithValue(error);
     }

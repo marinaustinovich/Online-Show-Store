@@ -39,9 +39,10 @@ export const CatalogCategories = ({ onCategoryChange }: Props) => {
   );
 
   const categoriesList = useMemo(() => {
-    if (!categories) {
+    if (categories.length === 0) {
       return null;
     }
+
     const categoriesArray = Object.values(categories);
     const allCategoryLink = (
       <a
