@@ -1,13 +1,6 @@
-import React from 'react';
-import { classname } from 'utils';
+import React from "react";
 
+import { Catalog } from "components";
 
-const cn = classname('catalog-page');
-
-const CatalogPage = () => (
-    <div className={cn()}>
-        CatalogPage
-    </div>
-);
-
+const CatalogPage = () => <Catalog isShowSearchForm={true} />;
 export default CatalogPage;

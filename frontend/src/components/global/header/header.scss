@@ -48,22 +48,13 @@
       position: absolute;
       right: 65px;
       top: calc(50% - 19px);
-      display: block;
       width: 233px;
       height: 38px;
-      padding: 0 20px;
-      background: #ffffff;
-      box-shadow: 0px 0px 10px #d4e4e6;
-      border-radius: 50px;
       text-align: right;
-    }
-    &-search-form .form-control {
-      width: 100%;
-      height: 100%;
-      color: #333333;
-      border: none;
-      outline: none;
-      box-shadow: none;
+
+      .form-control {
+        box-shadow: none;
+      }
     }
   }
 }

@@ -4,6 +4,7 @@
     "title": "Хиты продаж!"
   },
   "catalog": {
-    "title": "Каталог"
+    "title": "Каталог",
+    "search-form-placeholder": "Поиск"
   }
 }

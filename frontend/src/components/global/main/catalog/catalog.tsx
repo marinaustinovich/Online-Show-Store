@@ -6,6 +6,8 @@ import {
   Title,
   LoadMoreButton,
   CatalogCategories,
+  Input,
+  Form,
 } from "components";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,11 +23,15 @@ import { productsActions } from "store/products/slice";
 
 import "./catalog.scss";
 
+type CatalogProps = {
+  isShowSearchForm?: boolean;
+};
+
 const ITEMS_OFFSET_DEFAULT = 6;
 
 const cn = classname("catalog");
 
-export const Catalog = () => {
+export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
   const { t } = useTranslation("global");
   const dispatch = useAppDispatch();
 
@@ -44,7 +50,13 @@ export const Catalog = () => {
       params.categoryId = catalogId;
     }
 
-    dispatch(fetchItemsAction(params)).then(() => {setIsLoadingMore(false)})
+    if (offset === 0) {
+      dispatch(productsActions.clearItems());
+    }
+
+    dispatch(fetchItemsAction(params)).then(() => {
+      setIsLoadingMore(false);
+    });
   }, [dispatch, offset, catalogId]);
 
   const handleLoadMore = useCallback(() => {
@@ -80,24 +92,21 @@ export const Catalog = () => {
   return (
     <section className={cn("")}>
       <Title text={t("main.catalog.title")} />
-
-      <CatalogCategories onCategoryChange={handleCategoryChange} />
-
-      {showPreloader ? (
-        <Preloader />
-      ) : (
-        <>
-          <Row>
-            {products?.map((product) => (
-              <Card card={product} key={product.id} />
-            ))}
-          </Row>
-          
-          {!hideLoadMoreBtn && (
-            <LoadMoreButton onClick={handleLoadMore} isLoading={isLoadingMore} />
-          )}
-        </>
+      {isShowSearchForm && (
+        <Form className={cn("search-form")}>
+          <Input placeholder={t("main.catalog.search-form-placeholder")} />
+        </Form>
       )}
+      <CatalogCategories onCategoryChange={handleCategoryChange} />
+      {showPreloader && <Preloader />}
+      <>
+        <Row>
+          {products?.map((product) => <Card card={product} key={product.id} />)}
+        </Row>
+        {!showPreloader && !hideLoadMoreBtn && (
+          <LoadMoreButton onClick={handleLoadMore} isLoading={isLoadingMore} />
+        )}
+      </>
     </section>
   );
 };

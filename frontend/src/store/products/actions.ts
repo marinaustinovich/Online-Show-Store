@@ -54,11 +54,13 @@ export const fetchCategoriesAction = createAsyncThunk<Category[], void>(
   async (_, { rejectWithValue, dispatch }) => {
     try {
       const result = await fetchCategories();
-      console.log(result);
+
       dispatch(productsActions.setCategories(result));
+
       return result;
     } catch (error) {
       console.error("Error fetching categories", error);
+
       return rejectWithValue(error);
     }
   }

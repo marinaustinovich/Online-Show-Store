@@ -21,7 +21,9 @@ const cnNavLink = classname("nav-link");
 export const CatalogCategories = ({ onCategoryChange }: Props) => {
   const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
-  const [activeCategory, setActiveCategory] = useState<CategoryIdEnum>(CategoryIdEnum.ALL);
+  const [activeCategory, setActiveCategory] = useState<CategoryIdEnum>(
+    CategoryIdEnum.ALL
+  );
 
   const categories = useAppSelector(fetchedCategoriesSelector);
 
@@ -30,12 +32,18 @@ export const CatalogCategories = ({ onCategoryChange }: Props) => {
   }, [dispatch]);
 
   const handleCategoryClick = useCallback(
-    (categoryId: CategoryIdEnum) => (e: React.MouseEvent<HTMLAnchorElement>) => {
-      e.preventDefault();
-      onCategoryChange(categoryId);
-      setActiveCategory(categoryId);
-    },
-    [onCategoryChange]
+    (categoryId: CategoryIdEnum) =>
+      (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+
+        if (activeCategory === categoryId) {
+          return;
+        }
+        
+        setActiveCategory(categoryId);
+        onCategoryChange(categoryId);
+      },
+    [onCategoryChange, activeCategory]
   );
 
   const categoriesList = useMemo(() => {
@@ -47,7 +55,9 @@ export const CatalogCategories = ({ onCategoryChange }: Props) => {
     const allCategoryLink = (
       <a
         href="#all"
-        className={cnNavLink('', [ activeCategory === CategoryIdEnum.ALL ? 'active': '' ])}
+        className={cnNavLink("", [
+          activeCategory === CategoryIdEnum.ALL ? "active" : "",
+        ])}
         onClick={handleCategoryClick(CategoryIdEnum.ALL)}
       >
         {t("commons.catalog-categories.all")}
@@ -58,7 +68,9 @@ export const CatalogCategories = ({ onCategoryChange }: Props) => {
       <a
         key={category.id}
         href={`#${category.id}`}
-        className={cnNavLink('', [ activeCategory === category.id ? 'active': '' ])}
+        className={cnNavLink("", [
+          activeCategory === category.id ? "active" : "",
+        ])}
         onClick={handleCategoryClick(category.id)}
       >
         {category.title}

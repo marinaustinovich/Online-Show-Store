@@ -4,6 +4,7 @@
     "title": "Best sellers!"
   },
   "catalog": {
-    "title": "Catalog"
+    "title": "Catalog",
+    "search-form-placeholder": "Search"
   }
 }

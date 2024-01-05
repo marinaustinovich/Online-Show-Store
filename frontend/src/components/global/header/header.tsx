@@ -1,9 +1,9 @@
 import { classname } from "utils";
-
-import "./header.scss";
 import { Navbar } from "./navbar";
 
 import { Column, Wrapper } from "components/common";
+
+import "./header.scss";
 
 const cn = classname("container");
 
@@ -17,4 +17,3 @@ export const Header = () => (
   </header>
 );
 
-export default Header;
