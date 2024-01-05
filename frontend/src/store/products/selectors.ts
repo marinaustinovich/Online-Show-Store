@@ -23,3 +23,8 @@ export const fetchedCategoriesSelector = createSelector(
   [productsPageSelector],
   (products) => products.fetchCategories.data ?? []
 );
+
+export const activeCategoryIdSelector = createSelector(
+  [productsPageSelector],
+  (products) => products.activeCategoryId
+);

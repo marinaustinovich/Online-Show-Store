@@ -1,15 +1,18 @@
 import { classname } from "utils";
 import { UnOrderedList } from "components";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import "./catalog-categories.scss";
 import { CategoryIdEnum } from "enums/category-id-enum";
 import { useAppDispatch, useAppSelector } from "store";
 import {
+  activeCategoryIdSelector,
   fetchCategoriesAction,
   fetchedCategoriesSelector,
 } from "store/products";
+
+import { productsActions } from "store/products/slice";
 
 type Props = {
   onCategoryChange: (id: CategoryIdEnum) => void;
@@ -21,9 +24,8 @@ const cnNavLink = classname("nav-link");
 export const CatalogCategories = ({ onCategoryChange }: Props) => {
   const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
-  const [activeCategory, setActiveCategory] = useState<CategoryIdEnum>(
-    CategoryIdEnum.ALL
-  );
+
+  const activeCategory = useAppSelector(activeCategoryIdSelector);
 
   const categories = useAppSelector(fetchedCategoriesSelector);
 
@@ -39,11 +41,11 @@ export const CatalogCategories = ({ onCategoryChange }: Props) => {
         if (activeCategory === categoryId) {
           return;
         }
-        
-        setActiveCategory(categoryId);
+
+        dispatch(productsActions.setActiveCategoryId(categoryId));
         onCategoryChange(categoryId);
       },
-    [onCategoryChange, activeCategory]
+    [activeCategory, dispatch, onCategoryChange]
   );
 
   const categoriesList = useMemo(() => {

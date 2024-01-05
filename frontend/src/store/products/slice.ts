@@ -9,17 +9,20 @@ import {
 
 import { fetchItemsAction, fetchTopSalesAction } from "./actions";
 import { Category, ProductItem } from "api";
+import { CategoryIdEnum } from "enums";
 
 type ProductsSliceState = {
   fetchTopSales: RequestWithStatus<ProductItem[]>;
   fetchItems: RequestWithStatus<ProductItem[]>;
   fetchCategories: RequestWithStatus<Category[]>;
+  activeCategoryId: CategoryIdEnum | null;
 };
 
 const initialState: ProductsSliceState = {
   fetchTopSales: requestInitial(),
   fetchItems: requestInitial(),
   fetchCategories: requestInitial(),
+  activeCategoryId: null,
 };
 
 const productsSlice = createSlice({
@@ -30,7 +33,13 @@ const productsSlice = createSlice({
       state.fetchItems.data = [];
     },
     setCategories: (state, action: PayloadAction<Category[]>) => {
-      state.fetchCategories.data = { ...state.fetchCategories.data, ...action.payload };
+      state.fetchCategories.data = {
+        ...state.fetchCategories.data,
+        ...action.payload,
+      };
+    },
+    setActiveCategoryId: (state, action: PayloadAction<CategoryIdEnum>) => {
+      state.activeCategoryId = action.payload;
     },
   },
   extraReducers: (builder) => {

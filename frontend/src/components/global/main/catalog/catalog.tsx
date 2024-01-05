@@ -11,8 +11,11 @@ import {
 } from "components";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
 import { useAppDispatch, useAppSelector } from "store";
 import {
+  activeCategoryIdSelector,
   fetchItemsAction,
   fetchedItemsSelector,
   itemsStatusSelector,
@@ -20,6 +23,7 @@ import {
 import { ItemsFilters } from "api";
 import { CategoryIdEnum } from "enums/category-id-enum";
 import { productsActions } from "store/products/slice";
+import { useCategoryIdFromUrl } from "hooks";
 
 import "./catalog.scss";
 
@@ -34,30 +38,33 @@ const cn = classname("catalog");
 export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
   const { t } = useTranslation("global");
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [offset, setOffset] = useState<number>(0);
   const [prevItemsLength, setPrevItemsLength] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [catalogId, setCatalogId] = useState(CategoryIdEnum.ALL);
 
   const products = useAppSelector(fetchedItemsSelector);
   const productsStatus = useAppSelector(itemsStatusSelector);
+  const categoryId = useAppSelector(activeCategoryIdSelector);
+
+  useCategoryIdFromUrl()
 
   useEffect(() => {
-    const params: ItemsFilters = { offset };
-
-    if (catalogId !== CategoryIdEnum.ALL) {
-      params.categoryId = catalogId;
-    }
-
-    if (offset === 0) {
+    if (offset === 0 && categoryId !== null) {
       dispatch(productsActions.clearItems());
     }
+    const params: ItemsFilters = { offset };
+    if (categoryId && categoryId !== CategoryIdEnum.ALL) {
+      params.categoryId = categoryId;
+    }
 
-    dispatch(fetchItemsAction(params)).then(() => {
-      setIsLoadingMore(false);
-    });
-  }, [dispatch, offset, catalogId]);
+    if (categoryId !== null) { 
+      dispatch(fetchItemsAction(params)).then(() => {
+        setIsLoadingMore(false);
+      });
+    }
+  }, [dispatch, offset, categoryId]);
 
   const handleLoadMore = useCallback(() => {
     setOffset((prevOffset) => prevOffset + ITEMS_OFFSET_DEFAULT);
@@ -70,11 +77,13 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
   const handleCategoryChange = useCallback(
     (id: CategoryIdEnum) => {
       dispatch(productsActions.clearItems());
-      setCatalogId(id);
+
       setOffset(0);
       setPrevItemsLength(0);
+
+      navigate(`?categoryId=${id}`);
     },
-    [dispatch]
+    [dispatch, navigate]
   );
 
   const showPreloader = useMemo(
