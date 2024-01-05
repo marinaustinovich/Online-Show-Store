@@ -4,6 +4,7 @@ import { axios } from "utils";
 export type ItemsFilters = Partial<{
   categoryId: CategoryIdEnum;
   offset: number;
+  q: string;
 }>;
 
 export const fetchItems = async (filters: ItemsFilters) => {

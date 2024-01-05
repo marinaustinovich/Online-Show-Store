@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 import { classname } from "utils";
 
@@ -6,10 +6,12 @@ import "./input.scss";
 
 type InputProps = {
   placeholder?: string;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 const cn = classname("form-control");
 
-export const Input = ({ placeholder }: InputProps) => (
-  <input className={cn()} placeholder={placeholder} />
+export const Input = ({ ...props }: InputProps) => (
+  <input className={cn()} {...props} />
 );

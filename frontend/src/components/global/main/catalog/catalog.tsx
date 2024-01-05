@@ -43,28 +43,41 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
   const [offset, setOffset] = useState<number>(0);
   const [prevItemsLength, setPrevItemsLength] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [searchText, setSearchText] = useState<string>("");
+  const [isEnterPressed, setIsEnterPressed] = useState(false);
 
   const products = useAppSelector(fetchedItemsSelector);
   const productsStatus = useAppSelector(itemsStatusSelector);
   const categoryId = useAppSelector(activeCategoryIdSelector);
 
-  useCategoryIdFromUrl()
+  useCategoryIdFromUrl();
+
+  const params = useMemo(() => {
+    const params: ItemsFilters = { offset, q: searchText };
+    if (categoryId && categoryId !== CategoryIdEnum.ALL) {
+      params.categoryId = categoryId;
+    }
+
+    return params;
+  }, [categoryId, offset, searchText]);
 
   useEffect(() => {
     if (offset === 0 && categoryId !== null) {
       dispatch(productsActions.clearItems());
     }
-    const params: ItemsFilters = { offset };
-    if (categoryId && categoryId !== CategoryIdEnum.ALL) {
-      params.categoryId = categoryId;
-    }
 
-    if (categoryId !== null) { 
+    if (categoryId !== null) {
       dispatch(fetchItemsAction(params)).then(() => {
         setIsLoadingMore(false);
       });
     }
-  }, [dispatch, offset, categoryId]);
+  }, [dispatch, offset, categoryId, searchText, params]);
+
+  const handleSearchSubmit = useCallback(() => {
+    setIsEnterPressed(true);
+    setOffset(0);
+    setPrevItemsLength(0);
+  }, []);
 
   const handleLoadMore = useCallback(() => {
     setOffset((prevOffset) => prevOffset + ITEMS_OFFSET_DEFAULT);
@@ -102,8 +115,16 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
     <section className={cn("")}>
       <Title text={t("main.catalog.title")} />
       {isShowSearchForm && (
-        <Form className={cn("search-form")}>
-          <Input placeholder={t("main.catalog.search-form-placeholder")} />
+        <Form className={cn("search-form")} onSubmit={handleSearchSubmit}>
+          <Input
+            placeholder={t("main.catalog.search-form-placeholder")}
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+              setOffset(0);
+              setPrevItemsLength(0);
+            }}
+          />
         </Form>
       )}
       <CatalogCategories onCategoryChange={handleCategoryChange} />
