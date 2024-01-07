@@ -1,11 +1,16 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useAppSelector } from "store";
+import { useAppDispatch, useAppSelector } from "store";
 import { productSizesSelector } from "store/products";
 import { RadioButtonsGroup, QuantitySelector, Button } from "components/common";
+import { productsActions } from "store/products/slice";
+import { useNavigate } from "react-router-dom";
 
 export const ProductSizeAndQuantity = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const { t } = useTranslation("global");
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
@@ -20,11 +25,6 @@ export const ProductSizeAndQuantity = () => {
     [productSizes]
   );
 
-  const isAddToCartDisabled = useMemo(
-    () => !selectedSize || selectedQuantity < 1 || selectedQuantity > 10,
-    [selectedSize, selectedQuantity]
-  );
-
   const handleSizeSelect = useCallback(
     (value: string) => setSelectedSize(value),
     []
@@ -36,10 +36,18 @@ export const ProductSizeAndQuantity = () => {
   );
 
   const handleProductBuy = useCallback(() => {
-    if (!isAddToCartDisabled) {
-      console.log("Product added to cart:", selectedSize, selectedQuantity);
+    if (!selectedSize || !selectedQuantity) {
+      return;
     }
-  }, [selectedSize, selectedQuantity, isAddToCartDisabled]);
+
+    dispatch(
+      productsActions.setProductDetailsForBuy({
+        size: selectedSize,
+        count: selectedQuantity,
+      })
+    );
+    navigate('/cart');
+  }, [dispatch, navigate, selectedSize, selectedQuantity]);
 
   const showQuantitySelectorAndButton = useMemo(
     () => sizes.length > 0,
@@ -65,7 +73,7 @@ export const ProductSizeAndQuantity = () => {
       </div>
       {showQuantitySelectorAndButton && (
         <Button
-          disabled={isAddToCartDisabled}
+          disabled={!selectedSize}
           className="btn-danger btn-block btn-lg"
           onClick={handleProductBuy}
         >
