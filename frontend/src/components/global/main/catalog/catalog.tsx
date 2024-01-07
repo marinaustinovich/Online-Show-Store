@@ -54,12 +54,13 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
   useCategoryIdFromUrl();
 
   const params = useMemo(() => {
-    const params: ItemsFilters = { offset, q: searchProduct ?? ''};
+    const params: ItemsFilters = { offset };
     if (categoryId && categoryId !== CategoryIdEnum.ALL) {
       params.categoryId = categoryId;
     }
 
     if (searchProduct) {
+      params.q = searchProduct;
       setSearchText(searchProduct);
     }
 
@@ -71,7 +72,7 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
       dispatch(productsActions.clearItems());
     }
 
-    if (categoryId !== null && searchProduct !== null) {
+    if (categoryId !== null || searchProduct !== null) {
       dispatch(fetchItemsAction(params)).then(() => {
         setIsLoadingMore(false);
       });

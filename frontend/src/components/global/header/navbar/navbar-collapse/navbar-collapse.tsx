@@ -3,6 +3,9 @@ import { Link } from "components";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
+import { useAppDispatch } from "store";
+import { productsActions } from "store/products/slice";
+
 
 type Route = {
   name: string;
@@ -13,8 +16,15 @@ const cn = classname("navbar");
 
 export const NavbarCollapse = () => {
   const router = useLocation();
+  const dispatch = useAppDispatch();
   const { pathname } = router;
   const { t } = useTranslation("global");
+
+  const handleLinkClick = () => {
+    dispatch(productsActions.setSearchProduct(null));
+    dispatch(productsActions.clearItems());
+  };
+
 
   const routes = useMemo(
     (): Route[] => [
@@ -42,7 +52,7 @@ export const NavbarCollapse = () => {
           key={name}
           className={`nav-item ${pathname === path ? "active" : ""}`}
         >
-          <Link to={path}>
+          <Link to={path} onClick={handleLinkClick}>
             {name}
           </Link>
         </li>
