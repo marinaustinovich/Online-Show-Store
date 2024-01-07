@@ -28,3 +28,8 @@ export const activeCategoryIdSelector = createSelector(
   [productsPageSelector],
   (products) => products.activeCategoryId
 );
+
+export const searchProductSelector = createSelector(
+  [productsPageSelector],
+  (products) => products.searchProduct
+);

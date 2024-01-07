@@ -12,7 +12,7 @@ type FormProps = {
 
 const cn = classname("form");
 
-export const Form = ({ className, children, onSubmit }: FormProps) => {
+export const Form = ({ className, children, onSubmit, ...rest }: FormProps) => {
   const handleSubmit = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
@@ -21,5 +21,13 @@ export const Form = ({ className, children, onSubmit }: FormProps) => {
     },
     [onSubmit]
   );
-  return <form className={cn("", [cn("inline"), className])} onSubmit={handleSubmit}>{children}</form>;
+  return (
+    <form
+      className={cn("", [cn("inline"), className])}
+      onSubmit={handleSubmit}
+      {...rest}
+    >
+      {children}
+    </form>
+  );
 };

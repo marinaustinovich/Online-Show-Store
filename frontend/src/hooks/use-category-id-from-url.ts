@@ -1,7 +1,6 @@
 import { useAppDispatch } from "store";
 import { productsActions } from "store/products/slice";
 import { CategoryIdEnum } from "enums";
-import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useEffectOnce } from "./use-effect-once";
 
@@ -12,6 +11,11 @@ export const useCategoryIdFromUrl = () => {
   useEffectOnce(() => {
     const params = new URLSearchParams(location.search);
     const categoryIdParam = params.get("categoryId");
+    const qParam = params.get("q");
+
+    if (qParam) {
+      dispatch(productsActions.setSearchProduct(qParam));
+    }
 
     if (categoryIdParam) {
       if (categoryIdParam === CategoryIdEnum.ALL) {

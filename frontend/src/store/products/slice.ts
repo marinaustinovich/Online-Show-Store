@@ -16,6 +16,7 @@ type ProductsSliceState = {
   fetchItems: RequestWithStatus<ProductItem[]>;
   fetchCategories: RequestWithStatus<Category[]>;
   activeCategoryId: CategoryIdEnum | null;
+  searchProduct: string | null;
 };
 
 const initialState: ProductsSliceState = {
@@ -23,6 +24,7 @@ const initialState: ProductsSliceState = {
   fetchItems: requestInitial(),
   fetchCategories: requestInitial(),
   activeCategoryId: null,
+  searchProduct: null,
 };
 
 const productsSlice = createSlice({
@@ -40,6 +42,9 @@ const productsSlice = createSlice({
     },
     setActiveCategoryId: (state, action: PayloadAction<CategoryIdEnum>) => {
       state.activeCategoryId = action.payload;
+    },
+    setSearchProduct: (state, action: PayloadAction<string>) => {
+      state.searchProduct = action.payload;
     },
   },
   extraReducers: (builder) => {

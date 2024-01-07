@@ -19,6 +19,7 @@ import {
   fetchItemsAction,
   fetchedItemsSelector,
   itemsStatusSelector,
+  searchProductSelector,
 } from "store/products";
 import { ItemsFilters } from "api";
 import { CategoryIdEnum } from "enums/category-id-enum";
@@ -49,7 +50,8 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
   const products = useAppSelector(fetchedItemsSelector);
   const productsStatus = useAppSelector(itemsStatusSelector);
   const categoryId = useAppSelector(activeCategoryIdSelector);
-console.log(categoryId)
+  const searchProduct = useAppSelector(searchProductSelector);
+
   useCategoryIdFromUrl();
 
   const params = useMemo(() => {
@@ -58,8 +60,12 @@ console.log(categoryId)
       params.categoryId = categoryId;
     }
 
+    if (searchProduct) {
+      setSearchText(searchProduct);
+    }
+
     return params;
-  }, [categoryId, offset, searchText]);
+  }, [categoryId, offset, searchProduct, searchText]);
 
   useEffect(() => {
     if (offset === 0 && categoryId !== null) {
