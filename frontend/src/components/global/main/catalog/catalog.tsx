@@ -45,7 +45,6 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
   const [prevItemsLength, setPrevItemsLength] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [searchText, setSearchText] = useState<string>("");
-  const [isEnterPressed, setIsEnterPressed] = useState(false);
 
   const products = useAppSelector(fetchedItemsSelector);
   const productsStatus = useAppSelector(itemsStatusSelector);
@@ -55,7 +54,7 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
   useCategoryIdFromUrl();
 
   const params = useMemo(() => {
-    const params: ItemsFilters = { offset, q: searchText };
+    const params: ItemsFilters = { offset, q: searchProduct ?? ''};
     if (categoryId && categoryId !== CategoryIdEnum.ALL) {
       params.categoryId = categoryId;
     }
@@ -65,25 +64,25 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
     }
 
     return params;
-  }, [categoryId, offset, searchProduct, searchText]);
+  }, [categoryId, offset, searchProduct]);
 
   useEffect(() => {
-    if (offset === 0 && categoryId !== null) {
+    if (offset === 0 && categoryId !== null && searchProduct !== null) {
       dispatch(productsActions.clearItems());
     }
 
-    if (categoryId !== null) {
+    if (categoryId !== null && searchProduct !== null) {
       dispatch(fetchItemsAction(params)).then(() => {
         setIsLoadingMore(false);
       });
     }
-  }, [dispatch, offset, categoryId, searchText, params]);
+  }, [dispatch, offset, categoryId, searchText, searchProduct, params]);
 
   const handleSearchSubmit = useCallback(() => {
-    setIsEnterPressed(true);
     setOffset(0);
     setPrevItemsLength(0);
-  }, []);
+    dispatch(productsActions.setSearchProduct(searchText));
+  }, [searchText, dispatch]);
 
   const handleLoadMore = useCallback(() => {
     setOffset((prevOffset) => prevOffset + ITEMS_OFFSET_DEFAULT);
@@ -100,9 +99,9 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
       setOffset(0);
       setPrevItemsLength(0);
 
-      navigate(`?categoryId=${id}`);
+      navigate(`?categoryId=${id}&q=${searchProduct}`);
     },
-    [dispatch, navigate]
+    [dispatch, navigate, searchProduct]
   );
 
   const showPreloader = useMemo(
