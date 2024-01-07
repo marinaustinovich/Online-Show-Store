@@ -26,7 +26,7 @@ export type RequestWithStatus<D = null> = {
     status: RequestStatus;
     error: any | null;
     data: D | null;
-    errorCode: number | null;
+    errorCode: string | null;
     wasCalled: boolean;
 };
 
@@ -46,7 +46,7 @@ export const requestSuccess = <D>(data: D): RequestWithStatus<D> => ({
     wasCalled: true,
 });
 
-const requestFailed = (error: any, errorCode: number): RequestWithStatus => ({
+const requestFailed = (error: any, errorCode: string): RequestWithStatus => ({
     status: RequestStatus.ERROR,
     error,
     errorCode,
@@ -76,8 +76,9 @@ export const addAsyncThunkHandlers = <A, B, C>(builder: ActionReducerMapBuilder<
         })
         .addCase(getPosts.rejected.type, <S, A>(state: S, action: A) => {
             // @ts-ignore
-            state[actionName] = requestFailed(action.payload.response.data, action.payload.response.status);
+            state[actionName] = requestFailed(action.payload.message, action.payload.code);
         });
+       
 };
 
 export const composeBuilder = <A>(builder: ActionReducerMapBuilder<A>, funcs: Array<ReturnType<typeof createAsyncThunk<any, any>>>) => {
