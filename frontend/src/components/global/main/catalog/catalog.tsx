@@ -49,7 +49,7 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
   const products = useAppSelector(fetchedItemsSelector);
   const productsStatus = useAppSelector(itemsStatusSelector);
   const categoryId = useAppSelector(activeCategoryIdSelector);
-
+console.log(categoryId)
   useCategoryIdFromUrl();
 
   const params = useMemo(() => {

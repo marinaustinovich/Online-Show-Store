@@ -3,12 +3,13 @@ import { productsActions } from "store/products/slice";
 import { CategoryIdEnum } from "enums";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useEffectOnce } from "./use-effect-once";
 
 export const useCategoryIdFromUrl = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  useEffectOnce(() => {
     const params = new URLSearchParams(location.search);
     const categoryIdParam = params.get("categoryId");
 
@@ -23,6 +24,8 @@ export const useCategoryIdFromUrl = () => {
           dispatch(productsActions.setActiveCategoryId(parsedCategoryId));
         }
       }
+    } else {
+      dispatch(productsActions.setActiveCategoryId(CategoryIdEnum.ALL));
     }
   }, [location.search, dispatch]);
 };
