@@ -30,20 +30,6 @@ section {
   opacity: 0;
 }
 
-
-/* Catalog */
-
-.catalog-item-size {
-  display: inline-block;
-  padding: 0 10px;
-}
-
-.catalog-item-size.selected {
-  background: #727e86;
-  border-radius: 15px;
-  color: #fff;
-}
-
 /* Bootstrap */
 .nav-link.active {
   color: #ff0000;

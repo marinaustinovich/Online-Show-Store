@@ -19,6 +19,17 @@ export const fetchedItemsSelector = createSelector(
 export const itemsStatusSelector = (state: AppState) =>
   state.products.fetchItems.status;
 
+export const fetchedItemSelector = createSelector(
+  [productsPageSelector],
+  (products) => products.fetchItem
+);
+
+
+export const productSizesSelector = createSelector(
+  [productsPageSelector],
+  (products) => products.fetchItem?.sizes
+);
+
 export const fetchedCategoriesSelector = createSelector(
   [productsPageSelector],
   (products) => products.fetchCategories.data ?? []

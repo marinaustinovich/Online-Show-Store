@@ -1,0 +1,11 @@
+{
+  "table": {
+    "sku": "Article",
+    "manufacturer": "Manufacturer",
+    "color": "Color",
+    "material": "Materials",
+    "season": "Season",
+    "reason": "Occasion"
+  },
+  "sizes-label": "Sizes available: "
+}

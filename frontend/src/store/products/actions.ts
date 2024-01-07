@@ -4,10 +4,11 @@ import {
   ProductItem,
   ItemsFilters,
   fetchItems,
-  fetchProduct,
+  fetchItem,
   fetchTopSales,
   fetchCategories,
   Category,
+  FetchedItem,
 } from "api";
 import { productsActions } from "./slice";
 
@@ -25,12 +26,16 @@ export const fetchTopSalesAction = createAsyncThunk<ProductItem[], void>(
   }
 );
 
-export const fetchProductAction = createAsyncThunk<any, string>(
-  "products/fetchProduct",
-  async (id, { rejectWithValue }) => {
+export const fetchItemAction = createAsyncThunk<FetchedItem, string>(
+  "products/fetchItem",
+  async (id, { rejectWithValue, dispatch }) => {
     try {
-      return await fetchProduct(id);
+      const result = await fetchItem(id);
+      dispatch(productsActions.setFetchedProduct(result))
+console.log(result)
+      return result;
     } catch (error) {
+      console.error("Error fetching product", error);
       return rejectWithValue(error);
     }
   }

@@ -12,4 +12,6 @@ export * from "./load-more-button";
 export * from "./un-ordered-list";
 export * from "./catalog-categories";
 export * from "./form";
-export * from './input'
+export * from "./input";
+export * from "./table";
+export * from "./radio-buttons-group";
