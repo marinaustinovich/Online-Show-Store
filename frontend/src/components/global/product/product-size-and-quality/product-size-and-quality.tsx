@@ -3,11 +3,12 @@ import { useTranslation } from "react-i18next";
 
 import { useAppSelector } from "store";
 import { productSizesSelector } from "store/products";
-import { RadioButtonsGroup } from "components/common";
+import { RadioButtonsGroup, QuantitySelector, Button } from "components/common";
 
 export const ProductSizeAndQuantity = () => {
   const { t } = useTranslation("global");
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   const productSizes = useAppSelector(productSizesSelector);
 
@@ -19,9 +20,30 @@ export const ProductSizeAndQuantity = () => {
     [productSizes]
   );
 
+  const isAddToCartDisabled = useMemo(
+    () => !selectedSize || selectedQuantity < 1 || selectedQuantity > 10,
+    [selectedSize, selectedQuantity]
+  );
+
   const handleSizeSelect = useCallback(
     (value: string) => setSelectedSize(value),
     []
+  );
+
+  const handleQuantityChange = useCallback(
+    (newQuantity: number) => setSelectedQuantity(newQuantity),
+    []
+  );
+
+  const handleProductBuy = useCallback(() => {
+    if (!isAddToCartDisabled) {
+      console.log("Product added to cart:", selectedSize, selectedQuantity);
+    }
+  }, [selectedSize, selectedQuantity, isAddToCartDisabled]);
+
+  const showQuantitySelectorAndButton = useMemo(
+    () => sizes.length > 0,
+    [sizes]
   );
 
   return (
@@ -33,16 +55,23 @@ export const ProductSizeAndQuantity = () => {
           onSelect={handleSizeSelect}
           selectedOption={selectedSize}
         />
-        <p>
-          Количество:
-          <span className="btn-group btn-group-sm pl-2">
-            <button className="btn btn-secondary">-</button>
-            <span className="btn btn-outline-primary">1</span>
-            <button className="btn btn-secondary">+</button>
-          </span>
-        </p>
+        {showQuantitySelectorAndButton && (
+          <QuantitySelector
+            maxQuantity={10}
+            label={t("product.count-label")}
+            onQuantityChange={handleQuantityChange}
+          />
+        )}
       </div>
-      <button className="btn btn-danger btn-block btn-lg">В корзину</button>
+      {showQuantitySelectorAndButton && (
+        <Button
+          disabled={isAddToCartDisabled}
+          className="btn-danger btn-block btn-lg"
+          onClick={handleProductBuy}
+        >
+          {t("product.buy-btn-label")}
+        </Button>
+      )}
     </>
   );
 };

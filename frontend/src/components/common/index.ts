@@ -15,3 +15,4 @@ export * from "./form";
 export * from "./input";
 export * from "./table";
 export * from "./radio-buttons-group";
+export * from "./quantity-selector";

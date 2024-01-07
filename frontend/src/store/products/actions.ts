@@ -32,7 +32,7 @@ export const fetchItemAction = createAsyncThunk<FetchedItem, string>(
     try {
       const result = await fetchItem(id);
       dispatch(productsActions.setFetchedProduct(result))
-console.log(result)
+
       return result;
     } catch (error) {
       console.error("Error fetching product", error);

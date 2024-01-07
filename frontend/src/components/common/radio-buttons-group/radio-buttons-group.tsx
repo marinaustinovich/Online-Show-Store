@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { classname } from "utils";
 
 import "./radio-buttons-group.scss";

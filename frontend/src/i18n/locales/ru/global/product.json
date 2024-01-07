@@ -7,5 +7,7 @@
     "season": "Сезон",
     "reason": "Повод"
   },
-  "sizes-label": "Размеры в наличии: "
+  "sizes-label": "Размеры в наличии: ",
+  "count-label": " Количество: ",
+  "buy-btn-label": "В корзину"
 }

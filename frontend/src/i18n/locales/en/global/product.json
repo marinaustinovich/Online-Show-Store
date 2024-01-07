@@ -7,5 +7,7 @@
     "season": "Season",
     "reason": "Occasion"
   },
-  "sizes-label": "Sizes available: "
+  "sizes-label": "Sizes available: ",
+  "count-label": "Count: ",
+  "buy-btn-label": "Add to cart"
 }
