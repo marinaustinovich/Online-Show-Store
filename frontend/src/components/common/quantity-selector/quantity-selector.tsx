@@ -1,5 +1,5 @@
 import { classname } from "utils";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Button } from "../button";
 
 const MAX_QUANTITY = 100;
@@ -15,21 +15,21 @@ const cn = classname("quantity-selector");
 export const QuantitySelector = ({ label, maxQuantity = MAX_QUANTITY, onQuantityChange }: QuantitySelectorProps) => {
   const [quantity, setQuantity] = useState(1);
 
-  const incrementQuantity = () => {
+  const incrementQuantity = useCallback(() => {
     const newQuantity = quantity + 1;
     if (newQuantity <= maxQuantity) {
         setQuantity(newQuantity);
         onQuantityChange(newQuantity);
       } 
-  };
+  }, [maxQuantity, onQuantityChange, quantity]);
 
-  const decrementQuantity = () => {
+  const decrementQuantity = useCallback(() => {
     if (quantity > 1) {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);
       onQuantityChange(newQuantity); 
     }
-  };
+  }, [onQuantityChange, quantity]);
 
   return (
     <p className={cn()}>

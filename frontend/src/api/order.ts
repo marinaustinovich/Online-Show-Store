@@ -1,4 +1,2 @@
-export type ProductForBuyData = {
-    size: string;
-    count: number;
-  };
+import { ProductItem } from "./top-sales";
+

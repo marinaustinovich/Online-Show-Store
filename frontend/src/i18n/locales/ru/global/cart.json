@@ -1,0 +1,16 @@
+{
+  "title": "Корзина",
+  "empty-block": "В Вашей корзине нет товаров",
+  "table": {
+    "number": "#",
+    "title": "Название",
+    "size": "Размер",
+    "count": "Кол-во",
+    "price": "Стоимость",
+    "total": "Итого",
+    "actions": "Действия",
+    "delete": "Удалить",
+    "ru-currency-label": "руб.",
+    "total-price-label": "Общая стоимость"
+  }
+}

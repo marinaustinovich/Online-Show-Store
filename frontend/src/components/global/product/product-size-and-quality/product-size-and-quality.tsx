@@ -1,14 +1,14 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useAppDispatch, useAppSelector } from "store";
-import { productSizesSelector } from "store/products";
+import { useAppSelector } from "store";
+import { fetchedItemSelector, productSizesSelector } from "store/products";
 import { RadioButtonsGroup, QuantitySelector, Button } from "components/common";
-import { productsActions } from "store/products/slice";
+
 import { useNavigate } from "react-router-dom";
+import { ProductForBuy, addToCart, calculateTotalPrice } from "utils";
 
 export const ProductSizeAndQuantity = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { t } = useTranslation("global");
@@ -16,6 +16,7 @@ export const ProductSizeAndQuantity = () => {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   const productSizes = useAppSelector(productSizesSelector);
+  const product = useAppSelector(fetchedItemSelector);
 
   const sizes = useMemo(
     () =>
@@ -36,18 +37,27 @@ export const ProductSizeAndQuantity = () => {
   );
 
   const handleProductBuy = useCallback(() => {
-    if (!selectedSize || !selectedQuantity) {
+    if (!selectedSize || !selectedQuantity || !product) {
       return;
     }
 
-    dispatch(
-      productsActions.setProductDetailsForBuy({
-        size: selectedSize,
-        count: selectedQuantity,
-      })
-    );
-    navigate('/cart');
-  }, [dispatch, navigate, selectedSize, selectedQuantity]);
+    const productDetailsForBuy: ProductForBuy = {
+      name: product.title,
+      size: selectedSize,
+      count: selectedQuantity,
+      price: product.price,
+      total: calculateTotalPrice(product.price, selectedQuantity),
+      id: product.id,
+    };
+
+    try {
+      addToCart(productDetailsForBuy);
+
+      navigate("/cart");
+    } catch (error) {
+      console.error("Error handling localStorage:", error);
+    }
+  }, [product, selectedSize, selectedQuantity, navigate]);
 
   const showQuantitySelectorAndButton = useMemo(
     () => sizes.length > 0,

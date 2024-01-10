@@ -11,6 +11,7 @@ import ProductPage from "pages/product-page/product-page";
 import ErrorPage from "pages/404-page/404-page";
 import { Column, Wrapper } from "components/common";
 import { Banner } from "../banner";
+import CartPage from "pages/cart-page/cart-page";
 
 export const App = () => (
   <>
@@ -24,7 +25,8 @@ export const App = () => (
             <Route path="/" element={<MainPage />} />
             <Route path="/catalog/" element={<CatalogPage />} />
             <Route path="/about/" element={<AboutPage />} />
-            <Route path="/contacts/" element={<ContactsPage />} />{" "}
+            <Route path="/contacts/" element={<ContactsPage />} />
+            <Route path="/cart/" element={<CartPage />} />
             <Route path="/products/:id" element={<ProductPage />} />
             <Route path="/404-page/" element={<ErrorPage />} />
           </Routes>
