@@ -9,6 +9,7 @@ const cn = classname("cart");
 
 export const CartSection = () => {
   const { t } = useTranslation("global");
+  const locale = "cart.cart-section";
 
   const [cart, setCart] = useState<ProductForBuy[]>([]);
 
@@ -20,15 +21,15 @@ export const CartSection = () => {
   const updateCart = useCallback(() => {
     const updatedCart = getCart();
     setCart(updatedCart);
-  },[])
+  }, []);
 
   return (
     <section className={cn()}>
-      <Title text={t("cart.title")} />
+      <Title text={t(`${locale}.title`)} />
       {cart.length > 0 ? (
-        <CartTable cart={cart} onAfterDelete={updateCart}/>
+        <CartTable cart={cart} onAfterDelete={updateCart} />
       ) : (
-        <div className={cn("empty-block")}>{t("cart.empty-block")}</div>
+        <div className={cn("empty-block")}>{t(`${locale}.empty-block`)}</div>
       )}
     </section>
   );

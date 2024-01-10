@@ -1,16 +1,27 @@
 {
-  "title": "Корзина",
-  "empty-block": "В Вашей корзине нет товаров",
-  "table": {
-    "number": "#",
-    "title": "Название",
-    "size": "Размер",
-    "count": "Кол-во",
-    "price": "Стоимость",
-    "total": "Итого",
-    "actions": "Действия",
-    "delete": "Удалить",
-    "ru-currency-label": "руб.",
-    "total-price-label": "Общая стоимость"
+  "cart-section": {
+    "title": "Корзина",
+    "empty-block": "В Вашей корзине нет товаров",
+    "table": {
+      "number": "#",
+      "title": "Название",
+      "size": "Размер",
+      "count": "Кол-во",
+      "price": "Стоимость",
+      "total": "Итого",
+      "actions": "Действия",
+      "delete": "Удалить",
+      "ru-currency-label": "руб.",
+      "total-price-label": "Общая стоимость"
+    }
+  },
+  "order-section": {
+    "title": "Оформить заказ",
+    "phone-label": "Телефон",
+    "phone-placeholder": "Ваш телефон",
+    "address-label": "Адрес доставки",
+    "address-placeholder": "Адрес доставки",
+    "agreement-label": "Согласен с правилами доставки",
+    "design-btn": "Оформить"
   }
 }

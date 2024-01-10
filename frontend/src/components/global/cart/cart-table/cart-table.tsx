@@ -11,7 +11,7 @@ type CartTableProps = {
 
 export const CartTable = ({ cart, onAfterDelete }: CartTableProps) => {
   const { t } = useTranslation("global");
-  const locale = "cart.table";
+  const locale = "cart.cart-section.table";
 
   const handleProductDelete = useCallback((id: number) => {
     removeFromCart(id);

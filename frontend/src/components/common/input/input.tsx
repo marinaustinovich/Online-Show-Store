@@ -7,6 +7,7 @@ import "./input.scss";
 type InputProps = {
   placeholder?: string;
   value: string;
+  id?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
