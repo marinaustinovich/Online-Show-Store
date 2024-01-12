@@ -61,9 +61,17 @@ export const removeFromCart = (id: number) => {
   try {
     const cart: ProductForBuy[] = getCart();
     const updatedCart = cart.filter((item) => item.id !== id);
-console.log('delte', id, cart, updatedCart)
+
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   } catch (error) {
     console.error("Error updating localStorage:", error);
+  }
+};
+
+export const clearCart = () => {
+  try {
+    localStorage.removeItem("cart");
+  } catch (error) {
+    console.error("Error clearing cart from localStorage:", error);
   }
 };

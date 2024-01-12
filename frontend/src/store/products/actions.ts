@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 import {
   ProductItem,
@@ -9,8 +10,11 @@ import {
   fetchCategories,
   Category,
   FetchedItem,
+  createOrder,
+  OrderRequestState,
 } from "api";
 import { productsActions } from "./slice";
+import { clearCart } from "@utils";
 
 export const fetchTopSalesAction = createAsyncThunk<ProductItem[], void>(
   "products/fetchTopSales",
@@ -31,7 +35,7 @@ export const fetchItemAction = createAsyncThunk<FetchedItem, string>(
   async (id, { rejectWithValue, dispatch }) => {
     try {
       const result = await fetchItem(id);
-      dispatch(productsActions.setFetchedProduct(result))
+      dispatch(productsActions.setFetchedProduct(result));
 
       return result;
     } catch (error) {
@@ -65,6 +69,27 @@ export const fetchCategoriesAction = createAsyncThunk<Category[], void>(
       return result;
     } catch (error) {
       console.error("Error fetching categories", error);
+
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const createOrderAction = createAsyncThunk<void, OrderRequestState>(
+  "products/createOrder",
+  async (data, { rejectWithValue, dispatch }) => {
+    try {
+      const result = await createOrder(data);
+      if (result.status === 204) {
+        console.log('ok')
+        toast.success("Ваш Заказ успешно создан");
+
+        // clearCart();
+        // dispatch(productsActions.clearOrderData());
+      }
+    } catch (error) {
+      console.error("Error fetching categories", error);
+      toast.error("Ваш Заказа не смог быть создан, повторите попытку позже");
 
       return rejectWithValue(error);
     }

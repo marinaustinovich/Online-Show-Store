@@ -5,3 +5,4 @@ export * from "./string";
 export * from "./format";
 export * from "./calculate";
 export * from "./local-storage";
+export * from "./validators";

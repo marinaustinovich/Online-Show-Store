@@ -1,10 +1,13 @@
 {
-    "load-more-btn-label": "Load more",
-    "category-directory": {
-      "all": "All",
-      "women-shoes": "Women's shoes",
-      "men-shoes": "Men's shoes",
-      "unisex-shoes": "Unisex shoes",
-      "children-shoes": "Children's shoes"
-    }
+  "validators": {
+    "required": "This field is required"
+  },
+  "load-more-btn-label": "Load more",
+  "category-directory": {
+    "all": "All",
+    "women-shoes": "Women's shoes",
+    "men-shoes": "Men's shoes",
+    "unisex-shoes": "Unisex shoes",
+    "children-shoes": "Children's shoes"
+  }
 }

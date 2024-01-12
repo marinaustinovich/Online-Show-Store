@@ -1,4 +1,5 @@
 import React from "react";
+import { ToastContainer } from 'react-toastify';
 import { Route, Routes } from "react-router-dom";
 
 import { Footer } from "../footer";
@@ -13,8 +14,19 @@ import { Column, Wrapper } from "components/common";
 import { Banner } from "../banner";
 import CartPage from "pages/cart-page/cart-page";
 
+import 'react-toastify/dist/ReactToastify.css';
+
 export const App = () => (
   <>
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick={true}
+      pauseOnHover={true}
+      theme="light"
+    />
     <Header />
 
     <main className="container">

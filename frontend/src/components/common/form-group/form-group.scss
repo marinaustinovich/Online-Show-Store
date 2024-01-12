@@ -14,4 +14,10 @@
       border-color 0.15s ease-in-out,
       box-shadow 0.15s ease-in-out;
   }
+
+  &-error {
+    color: rgb(243, 70, 70);
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+  }
 }

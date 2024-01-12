@@ -44,3 +44,9 @@ export const searchProductSelector = createSelector(
   [productsPageSelector],
   (products) => products.searchProduct
 );
+
+export const orderFormDataSelector = createSelector(
+  [productsPageSelector],
+  (products) => products.orderFormData
+);
+

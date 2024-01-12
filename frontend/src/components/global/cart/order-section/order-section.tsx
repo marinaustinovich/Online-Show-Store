@@ -1,7 +1,10 @@
+import { useAppDispatch, useAppSelector } from "store";
+import { createOrderAction, orderFormDataSelector } from "store/products";
 import { Button, Checkbox, FormGroup, Title } from "components";
-import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
+import React, { ChangeEvent, FormEvent, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { classname } from "utils";
+import { ProductForBuy, classname, getCart, required } from "utils";
+import { productsActions } from "store/products/slice";
 
 const cn = classname("order");
 
@@ -9,30 +12,45 @@ export const OrderSection = () => {
   const { t } = useTranslation("global");
   const locale = "cart.order-section";
 
-  const [formData, setFormData] = useState({
-    phone: "",
-    address: "",
-    agreement: false,
-  });
+  const orderFormData = useAppSelector(orderFormDataSelector);
+  const dispatch = useAppDispatch();
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const { id, value, checked, type } = e.target;
- 
-      setFormData({
-        ...formData,
-        [id]: type === "checkbox" ? checked : value,
-      });
+
+      dispatch(
+        productsActions.setOrderFormData({
+          ...orderFormData,
+          [id]: type === "checkbox" ? checked : value,
+        })
+      );
     },
-    [formData]
+    [dispatch, orderFormData]
   );
 
   const handleSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(formData);
+
+      const { phone, address } = orderFormData;
+      const selectedProducts = getCart();
+
+      const data = {
+        items: selectedProducts.map(({ id, price, count }: ProductForBuy) => ({
+          id,
+          price,
+          count,
+        })),
+        owner: {
+          phone,
+          address,
+        },
+      };
+
+      dispatch(createOrderAction(data));
     },
-    [formData]
+    [orderFormData, dispatch]
   );
 
   return (
@@ -44,26 +62,28 @@ export const OrderSection = () => {
             id="phone"
             placeholder={t(`${locale}.phone-placeholder`)}
             label={t(`${locale}.phone-label`)}
-            value={formData.phone}
+            value={orderFormData.phone}
             onChange={handleChange}
+            validate={required}
           />
           <FormGroup
             id="address"
             placeholder={t(`${locale}.address-placeholder`)}
             label={t(`${locale}.address-label`)}
-            value={formData.address}
+            value={orderFormData.address}
             onChange={handleChange}
+            validate={required}
           />
           <Checkbox
             id="agreement"
             label={t(`${locale}.agreement-label`)}
-            checked={formData.agreement}
+            checked={orderFormData.agreement}
             onChange={handleChange}
           />
           <Button
             className="btn-outline-secondary"
             type="submit"
-            disabled={!formData.agreement}
+            disabled={!orderFormData.agreement}
           >
             {t(`${locale}.design-btn`)}
           </Button>

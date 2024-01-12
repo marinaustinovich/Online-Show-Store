@@ -8,7 +8,7 @@ import {
 } from "utils";
 
 import { fetchItemsAction, fetchTopSalesAction } from "./actions";
-import { Category, FetchedItem, ProductItem } from "api";
+import { Category, FetchedItem, OrderFormState, ProductItem } from "api";
 import { CategoryIdEnum } from "enums";
 
 type ProductsSliceState = {
@@ -18,6 +18,7 @@ type ProductsSliceState = {
   activeCategoryId: CategoryIdEnum | null;
   searchProduct: string | null;
   fetchItem: FetchedItem | null;
+  orderFormData: OrderFormState;
 };
 
 const initialState: ProductsSliceState = {
@@ -27,6 +28,11 @@ const initialState: ProductsSliceState = {
   fetchItem: null,
   activeCategoryId: null,
   searchProduct: null,
+  orderFormData: {
+    phone: "",
+    address: "",
+    agreement: false,
+  },
 };
 
 const productsSlice = createSlice({
@@ -50,6 +56,19 @@ const productsSlice = createSlice({
     },
     setFetchedProduct: (state, action: PayloadAction<FetchedItem | null>) => {
       state.fetchItem = action.payload;
+    },
+    setOrderFormData: (state, action: PayloadAction<OrderFormState>) => {
+      state.orderFormData = action.payload;
+    },
+    clearOrderData: (state) => {
+      state.activeCategoryId = null;
+      state.searchProduct = null;
+      state.fetchItem = null;
+      state.orderFormData = {
+        phone: "",
+        address: "",
+        agreement: false,
+      };
     },
   },
   extraReducers: (builder) => {
