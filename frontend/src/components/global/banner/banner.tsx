@@ -12,7 +12,7 @@ export const Banner = () => {
 
   return (
     <div className={cn("")}>
-      <img src="./img/banner.jpg" className="img-fluid" alt="К весне готовы!" />
+      <img src="/img/banner.jpg" className="img-fluid" alt="К весне готовы!" />
       <h2 className={cn("header")}>{t('main.banner')}</h2>
     </div>
   );
