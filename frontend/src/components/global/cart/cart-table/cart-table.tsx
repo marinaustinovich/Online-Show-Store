@@ -3,20 +3,25 @@ import { useTranslation } from "react-i18next";
 import { Button, Table } from "components/common";
 import React, { useCallback, useMemo } from "react";
 import { ProductForBuy, formatPrice, removeFromCart } from "utils";
+import { useAppDispatch } from "store";
+import { productsActions } from "store/products/slice";
 
 type CartTableProps = {
   cart: ProductForBuy[];
-  onAfterDelete: ()=> void;
 };
 
-export const CartTable = ({ cart, onAfterDelete }: CartTableProps) => {
+export const CartTable = ({ cart }: CartTableProps) => {
   const { t } = useTranslation("global");
   const locale = "cart.cart-section.table";
+  const dispatch = useAppDispatch();
 
-  const handleProductDelete = useCallback((id: number) => {
-    removeFromCart(id);
-    onAfterDelete();
-  }, [onAfterDelete]);
+  const handleProductDelete = useCallback(
+    (id: number) => {
+      const cart = removeFromCart(id);
+      dispatch(productsActions.setCart(cart ?? []));
+    },
+    [dispatch]
+  );
 
   const columns = useMemo(
     () => [

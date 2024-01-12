@@ -48,6 +48,8 @@ export const addToCart = (productDetailsForBuy: ProductForBuy) => {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
+
+    return cart;
   } catch (error) {
     console.error("Error writing to localStorage:", error);
   }
@@ -63,6 +65,8 @@ export const removeFromCart = (id: number) => {
     const updatedCart = cart.filter((item) => item.id !== id);
 
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+    return updatedCart;
   } catch (error) {
     console.error("Error updating localStorage:", error);
   }

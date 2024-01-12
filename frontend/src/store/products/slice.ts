@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import {
   composeBuilder,
+  ProductForBuy,
   requestInitial,
   requestSuccess,
   RequestWithStatus,
@@ -18,6 +19,7 @@ type ProductsSliceState = {
   activeCategoryId: CategoryIdEnum | null;
   searchProduct: string | null;
   fetchItem: FetchedItem | null;
+  cart: ProductForBuy[];
   orderFormData: OrderFormState;
   orderStatus: boolean;
 };
@@ -35,6 +37,7 @@ const initialState: ProductsSliceState = {
     agreement: false,
   },
   orderStatus: false,
+  cart: [],
 };
 
 const productsSlice = createSlice({
@@ -64,6 +67,9 @@ const productsSlice = createSlice({
     },
     setOrderStatus: (state, action: PayloadAction<boolean>) => {
       state.orderStatus = action.payload;
+    },
+    setCart: (state, action: PayloadAction<ProductForBuy[]>) => {
+      state.cart = action.payload;
     },
     clearOrderData: (state) => {
       state.activeCategoryId = null;

@@ -1,11 +1,17 @@
 import React from "react";
 import { CartSection, OrderSection } from "components";
+import { useAppSelector } from "store";
+import { cartCountSelector } from "store/products";
 
-const CartPage = () => (
-  <>
-    <CartSection />
-    <OrderSection />
-  </>
-);
+const CartPage = () => {
+  const selectedProductsCount = useAppSelector(cartCountSelector);
+
+  return (
+    <>
+      <CartSection />
+      {selectedProductsCount > 0 && <OrderSection />}
+    </>
+  );
+};
 
 export default CartPage;

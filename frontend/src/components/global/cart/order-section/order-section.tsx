@@ -23,7 +23,6 @@ export const OrderSection = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(orderStatus);
     if (orderStatus) {
       navigate("/");
       dispatch(productsActions.setOrderStatus(false));

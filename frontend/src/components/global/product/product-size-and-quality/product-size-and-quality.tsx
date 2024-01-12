@@ -1,15 +1,17 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useAppSelector } from "store";
+import { useAppDispatch, useAppSelector } from "store";
 import { fetchedItemSelector, productSizesSelector } from "store/products";
 import { RadioButtonsGroup, QuantitySelector, Button } from "components/common";
 
 import { useNavigate } from "react-router-dom";
 import { ProductForBuy, addToCart, calculateTotalPrice } from "utils";
+import { productsActions } from "store/products/slice";
 
 export const ProductSizeAndQuantity = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const { t } = useTranslation("global");
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
@@ -51,13 +53,13 @@ export const ProductSizeAndQuantity = () => {
     };
 
     try {
-      addToCart(productDetailsForBuy);
-
+      const cart = addToCart(productDetailsForBuy);
+      dispatch(productsActions.setCart(cart ?? []));
       navigate("/cart");
     } catch (error) {
       console.error("Error handling localStorage:", error);
     }
-  }, [product, selectedSize, selectedQuantity, navigate]);
+  }, [product, selectedSize, selectedQuantity, navigate, dispatch]);
 
   const showQuantitySelectorAndButton = useMemo(
     () => sizes.length > 0,

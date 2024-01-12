@@ -24,7 +24,6 @@ export const fetchedItemSelector = createSelector(
   (products) => products.fetchItem
 );
 
-
 export const productSizesSelector = createSelector(
   [productsPageSelector],
   (products) => products.fetchItem?.sizes
@@ -55,3 +54,12 @@ export const orderStatusSelector = createSelector(
   (products) => products.orderStatus
 );
 
+export const cartCountSelector = createSelector(
+  [productsPageSelector],
+  (products) => products.cart.length
+);
+
+export const cartSelector = createSelector(
+  [productsPageSelector],
+  (products) => products.cart
+);
