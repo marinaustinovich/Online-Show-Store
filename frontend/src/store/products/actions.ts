@@ -14,7 +14,7 @@ import {
   OrderRequestState,
 } from "api";
 import { productsActions } from "./slice";
-import { clearCart } from "@utils";
+import { clearCart } from "utils";
 
 export const fetchTopSalesAction = createAsyncThunk<ProductItem[], void>(
   "products/fetchTopSales",
@@ -81,11 +81,11 @@ export const createOrderAction = createAsyncThunk<void, OrderRequestState>(
     try {
       const result = await createOrder(data);
       if (result.status === 204) {
-        console.log('ok')
         toast.success("Ваш Заказ успешно создан");
 
-        // clearCart();
-        // dispatch(productsActions.clearOrderData());
+        clearCart();
+        dispatch(productsActions.clearOrderData());
+        dispatch(productsActions.setOrderStatus(true));
       }
     } catch (error) {
       console.error("Error fetching categories", error);

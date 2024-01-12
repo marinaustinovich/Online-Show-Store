@@ -19,6 +19,7 @@ type ProductsSliceState = {
   searchProduct: string | null;
   fetchItem: FetchedItem | null;
   orderFormData: OrderFormState;
+  orderStatus: boolean;
 };
 
 const initialState: ProductsSliceState = {
@@ -33,6 +34,7 @@ const initialState: ProductsSliceState = {
     address: "",
     agreement: false,
   },
+  orderStatus: false,
 };
 
 const productsSlice = createSlice({
@@ -59,6 +61,9 @@ const productsSlice = createSlice({
     },
     setOrderFormData: (state, action: PayloadAction<OrderFormState>) => {
       state.orderFormData = action.payload;
+    },
+    setOrderStatus: (state, action: PayloadAction<boolean>) => {
+      state.orderStatus = action.payload;
     },
     clearOrderData: (state) => {
       state.activeCategoryId = null;

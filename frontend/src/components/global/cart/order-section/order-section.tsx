@@ -1,10 +1,15 @@
 import { useAppDispatch, useAppSelector } from "store";
-import { createOrderAction, orderFormDataSelector } from "store/products";
+import {
+  createOrderAction,
+  orderFormDataSelector,
+  orderStatusSelector,
+} from "store/products";
 import { Button, Checkbox, FormGroup, Title } from "components";
-import React, { ChangeEvent, FormEvent, useCallback } from "react";
+import React, { ChangeEvent, FormEvent, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ProductForBuy, classname, getCart, required } from "utils";
 import { productsActions } from "store/products/slice";
+import { useNavigate } from "react-router-dom";
 
 const cn = classname("order");
 
@@ -13,7 +18,17 @@ export const OrderSection = () => {
   const locale = "cart.order-section";
 
   const orderFormData = useAppSelector(orderFormDataSelector);
+  const orderStatus = useAppSelector(orderStatusSelector);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(orderStatus);
+    if (orderStatus) {
+      navigate("/");
+      dispatch(productsActions.setOrderStatus(false));
+    }
+  }, [orderStatus, navigate, dispatch]);
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {

@@ -27,7 +27,6 @@ export const FormGroup = ({
 
   useEffect(() => {
     if (validate) {
-      console.log(validate(value));
       setError(validate(value));
     }
   }, [value, validate]);

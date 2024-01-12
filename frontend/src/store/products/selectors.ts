@@ -50,3 +50,8 @@ export const orderFormDataSelector = createSelector(
   (products) => products.orderFormData
 );
 
+export const orderStatusSelector = createSelector(
+  [productsPageSelector],
+  (products) => products.orderStatus
+);
+
