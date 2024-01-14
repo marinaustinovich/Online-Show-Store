@@ -47,9 +47,11 @@ export const fetchItemAction = createAsyncThunk<FetchedItem, string>(
 
 export const fetchItemsAction = createAsyncThunk<ProductItem[], ItemsFilters>(
   "products/fetchItems",
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const result = await fetchItems(data);
+      
+      dispatch(productsActions.setFetchedItems(result));
 
       return result;
     } catch (error) {

@@ -13,7 +13,7 @@ export const topSalesStatusSelector = (state: AppState) =>
 
 export const fetchedItemsSelector = createSelector(
   [productsPageSelector],
-  (products) => products.fetchItems.data ?? []
+  (products) => products.products
 );
 
 export const itemsStatusSelector = (state: AppState) =>

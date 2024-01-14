@@ -10,9 +10,11 @@ import {
   activeCategoryIdSelector,
   fetchCategoriesAction,
   fetchedCategoriesSelector,
+  searchProductSelector,
 } from "store/products";
 
 import { productsActions } from "store/products/slice";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   onCategoryChange: (id: CategoryIdEnum) => void;
@@ -24,9 +26,10 @@ const cnNavLink = classname("nav-link");
 export const CatalogCategories = ({ onCategoryChange }: Props) => {
   const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const activeCategory = useAppSelector(activeCategoryIdSelector);
-
+  const searchProduct = useAppSelector(searchProductSelector);
   const categories = useAppSelector(fetchedCategoriesSelector);
 
   useEffect(() => {
@@ -43,9 +46,14 @@ export const CatalogCategories = ({ onCategoryChange }: Props) => {
         }
 
         dispatch(productsActions.setActiveCategoryId(categoryId));
+        dispatch(productsActions.clearItems());
         onCategoryChange(categoryId);
+
+        const queryString = searchProduct ? `?categoryId=${categoryId}&q=${searchProduct}` : `?categoryId=${categoryId}`;
+
+        navigate(queryString);
       },
-    [activeCategory, dispatch, onCategoryChange]
+    [activeCategory, dispatch, navigate, onCategoryChange, searchProduct]
   );
 
   const categoriesList = useMemo(() => {

@@ -4,11 +4,14 @@ import {
   composeBuilder,
   ProductForBuy,
   requestInitial,
-  requestSuccess,
   RequestWithStatus,
 } from "utils";
 
-import { fetchItemsAction, fetchTopSalesAction } from "./actions";
+import {
+  fetchCategoriesAction,
+  fetchItemsAction,
+  fetchTopSalesAction,
+} from "./actions";
 import { Category, FetchedItem, OrderFormState, ProductItem } from "api";
 import { CategoryIdEnum } from "enums";
 
@@ -16,6 +19,7 @@ type ProductsSliceState = {
   fetchTopSales: RequestWithStatus<ProductItem[]>;
   fetchItems: RequestWithStatus<ProductItem[]>;
   fetchCategories: RequestWithStatus<Category[]>;
+  products: ProductItem[];
   activeCategoryId: CategoryIdEnum | null;
   searchProduct: string | null;
   fetchItem: FetchedItem | null;
@@ -28,6 +32,7 @@ const initialState: ProductsSliceState = {
   fetchTopSales: requestInitial(),
   fetchItems: requestInitial(),
   fetchCategories: requestInitial(),
+  products: [],
   fetchItem: null,
   activeCategoryId: null,
   searchProduct: null,
@@ -45,7 +50,10 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     clearItems: (state) => {
-      state.fetchItems.data = [];
+      state.products = [];
+    },
+    setFetchedItems: (state, action: PayloadAction<ProductItem[]>) => {
+      state.products = [...state.products, ...action.payload];
     },
     setCategories: (state, action: PayloadAction<Category[]>) => {
       state.fetchCategories.data = {
@@ -83,17 +91,7 @@ const productsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    composeBuilder(builder, [fetchTopSalesAction]);
-    builder.addCase(fetchItemsAction.fulfilled, (state, action) => {
-      if (state.fetchItems.wasCalled) {
-        state.fetchItems.data = [
-          ...(state.fetchItems.data || []),
-          ...action.payload,
-        ];
-      } else {
-        state.fetchItems = requestSuccess(action.payload);
-      }
-    });
+    composeBuilder(builder, [ fetchTopSalesAction, fetchItemsAction, fetchCategoriesAction ]);
   },
 });
 

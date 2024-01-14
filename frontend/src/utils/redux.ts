@@ -4,7 +4,7 @@ import { ActionReducerMapBuilder, createAsyncThunk } from '@reduxjs/toolkit';
 
 export enum RequestStatus {
     NONE = 'none',
-    PROCESSING = 'PROCESSING',
+    PROCESSING = 'pending',
     SUCCESS = 'success',
     ERROR = 'error',
 }

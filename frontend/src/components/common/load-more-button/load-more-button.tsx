@@ -2,26 +2,25 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import { classname } from "utils";
-import { Preloader } from "../preloader";
+
 
 type Props = {
   onClick?: () => void;
-  isLoading: boolean;
+  isDisabled: boolean;
 };
 
 const cn = classname("btn");
 
-export const LoadMoreButton = ({ onClick, isLoading }: Props) => {
+export const LoadMoreButton = ({ onClick, isDisabled }: Props) => {
   const { t } = useTranslation("common");
 
   const handleOnClick = useCallback(() => onClick?.(), [onClick]);
 
   return (
     <div className="text-center">
-      {isLoading && <Preloader />}
       <button
         className={cn("", [cn("outline-primary")])}
-        disabled={isLoading}
+        disabled={isDisabled}
         onClick={handleOnClick}
       >
         {t("commons.load-more-btn-label")}

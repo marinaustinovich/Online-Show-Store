@@ -6,12 +6,9 @@ import {
   Title,
   LoadMoreButton,
   CatalogCategories,
-  Input,
-  Form,
 } from "components";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "store";
 import {
@@ -25,6 +22,7 @@ import { ItemsFilters } from "api";
 import { CategoryIdEnum } from "enums/category-id-enum";
 import { productsActions } from "store/products/slice";
 import { useCategoryIdFromUrl } from "hooks";
+import { CatalogSearchForm } from "./catalog-search-form";
 
 import "./catalog.scss";
 
@@ -39,19 +37,17 @@ const cn = classname("catalog");
 export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
   const { t } = useTranslation("global");
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const [offset, setOffset] = useState<number>(0);
   const [prevItemsLength, setPrevItemsLength] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [searchText, setSearchText] = useState<string>("");
 
   const products = useAppSelector(fetchedItemsSelector);
   const productsStatus = useAppSelector(itemsStatusSelector);
   const categoryId = useAppSelector(activeCategoryIdSelector);
   const searchProduct = useAppSelector(searchProductSelector);
 
-  useCategoryIdFromUrl();
+  const { isParamsSet } = useCategoryIdFromUrl();
 
   const params = useMemo(() => {
     const params: ItemsFilters = { offset };
@@ -61,87 +57,78 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
 
     if (searchProduct) {
       params.q = searchProduct;
-      setSearchText(searchProduct);
     }
 
     return params;
   }, [categoryId, offset, searchProduct]);
 
   useEffect(() => {
-    if (offset === 0 && categoryId !== null && searchProduct !== null) {
-      dispatch(productsActions.clearItems());
-    }
+    if (isParamsSet) {
+      if (offset === 0 && categoryId !== null && searchProduct !== null) {
+        dispatch(productsActions.clearItems());
+      }
 
-    if (categoryId !== null || searchProduct !== null) {
-      dispatch(fetchItemsAction(params)).then(() => {
-        setIsLoadingMore(false);
-      });
+      if (categoryId !== null || searchProduct !== null) {
+        dispatch(fetchItemsAction(params)).then(() => {
+          setIsLoadingMore(false);
+        });
+      }
     }
-  }, [dispatch, offset, categoryId, searchText, searchProduct, params]);
+  }, [isParamsSet, dispatch, offset, categoryId, searchProduct, params]);
 
   const handleSearchSubmit = useCallback(() => {
     setOffset(0);
     setPrevItemsLength(0);
-    dispatch(productsActions.setSearchProduct(searchText));
-  }, [searchText, dispatch]);
+  }, []);
 
   const handleLoadMore = useCallback(() => {
     setOffset((prevOffset) => prevOffset + ITEMS_OFFSET_DEFAULT);
     setIsLoadingMore(true);
+    
     if (products.length > prevItemsLength) {
       setPrevItemsLength(products.length);
     }
   }, [products.length, prevItemsLength]);
 
-  const handleCategoryChange = useCallback(
-    (id: CategoryIdEnum) => {
-      dispatch(productsActions.clearItems());
-
-      setOffset(0);
-      setPrevItemsLength(0);
-
-      navigate(`?categoryId=${id}&q=${searchProduct}`);
-    },
-    [dispatch, navigate, searchProduct]
-  );
+  const handleCategoryChange = useCallback(() => {
+    setOffset(0);
+    setPrevItemsLength(0);
+  }, []);
 
   const showPreloader = useMemo(
-    () => products.length === 0 || productsStatus === RequestStatus.NONE,
+    () => productsStatus === RequestStatus.PROCESSING,
+    [productsStatus]
+  );
+
+  const showEmptyBlock = useMemo(
+    () => productsStatus === RequestStatus.SUCCESS && !products.length,
     [products.length, productsStatus]
   );
 
-  const hideLoadMoreBtn = useMemo(
-    () =>
-      prevItemsLength === products.length &&
-      products.length % ITEMS_OFFSET_DEFAULT !== 0,
-    [products.length, prevItemsLength]
+  const showLoadMoreBtn = useMemo(
+    () => (products.length !== 0 && products.length % ITEMS_OFFSET_DEFAULT === 0) || isLoadingMore,
+    [products.length, isLoadingMore]
   );
+  
 
   return (
     <section className={cn("")}>
       <Title text={t("main.catalog.title")} />
-      {isShowSearchForm && (
-        <Form className={cn("search-form")} onSubmit={handleSearchSubmit}>
-          <Input
-            placeholder={t("main.catalog.search-form-placeholder")}
-            value={searchText}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-              setOffset(0);
-              setPrevItemsLength(0);
-            }}
-          />
-        </Form>
-      )}
+      {isShowSearchForm && ( <CatalogSearchForm onSearchSubmit={handleSearchSubmit} /> )}
       <CatalogCategories onCategoryChange={handleCategoryChange} />
-      {showPreloader && <Preloader />}
+
       <>
         <Row>
           {products?.map((product) => <Card card={product} key={product.id} />)}
+
+          {showEmptyBlock && (
+            <div className={cn("empty-block")}>
+              {t("main.catalog.empty-block")}
+            </div>
+          )}
         </Row>
-        {!showPreloader && !hideLoadMoreBtn && (
-          <LoadMoreButton onClick={handleLoadMore} isLoading={isLoadingMore} />
-        )}
+        {showPreloader && <Preloader />}
+        {showLoadMoreBtn && ( <LoadMoreButton onClick={handleLoadMore} isDisabled={showPreloader} /> )}
       </>
     </section>
   );

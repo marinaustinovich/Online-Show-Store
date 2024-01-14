@@ -5,6 +5,7 @@
   },
   "catalog": {
     "title": "Catalog",
-    "search-form-placeholder": "Search"
+    "search-form-placeholder": "Search",
+    "empty-block": "There are no products in the catalog that match your search criteria"
   }
 }

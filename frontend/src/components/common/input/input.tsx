@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, KeyboardEvent } from "react";
 
 import { classname } from "utils";
 
@@ -9,6 +9,7 @@ type InputProps = {
   value: string;
   id?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onKeyPress?: (e: KeyboardEvent<HTMLInputElement>) => void;
 };
 
 const cn = classname("form-control");

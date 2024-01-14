@@ -5,6 +5,7 @@
   },
   "catalog": {
     "title": "Каталог",
-    "search-form-placeholder": "Поиск"
+    "search-form-placeholder": "Поиск",
+    "empty-block": "В каталоге нет товаров, соответствующих критериям Вашего поиска"
   }
 }
