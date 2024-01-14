@@ -80,6 +80,7 @@ const productsSlice = createSlice({
       state.cart = action.payload;
     },
     clearOrderData: (state) => {
+      state.cart = [];
       state.activeCategoryId = null;
       state.searchProduct = null;
       state.fetchItem = null;
