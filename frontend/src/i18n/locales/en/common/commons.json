@@ -2,6 +2,10 @@
   "validators": {
     "required": "This field is required"
   },
+  "notifications": {
+    "fetch-order-error": "Your Order could not be created, please try again later",
+    "fetch-products-error": "Oops, something went wrong! Try refreshing the page later"
+  },
   "load-more-btn-label": "Load more",
   "category-directory": {
     "all": "All",

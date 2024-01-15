@@ -15,6 +15,7 @@ import {
 } from "api";
 import { productsActions } from "./slice";
 import { clearCart } from "utils";
+import i18next from "i18next";
 
 export const fetchTopSalesAction = createAsyncThunk<ProductItem[], void>(
   "products/fetchTopSales",
@@ -55,6 +56,8 @@ export const fetchItemsAction = createAsyncThunk<ProductItem[], ItemsFilters>(
 
       return result;
     } catch (error) {
+      toast.error(i18next.t('common:commons.notifications.fetch-products-error'));
+
       return rejectWithValue(error);
     }
   }
@@ -91,7 +94,7 @@ export const createOrderAction = createAsyncThunk<void, OrderRequestState>(
       }
     } catch (error) {
       console.error("Error fetching categories", error);
-      toast.error("Ваш Заказа не смог быть создан, повторите попытку позже");
+      toast.error(i18next.t('common:commons.notifications.fetch-order-error'));
 
       return rejectWithValue(error);
     }

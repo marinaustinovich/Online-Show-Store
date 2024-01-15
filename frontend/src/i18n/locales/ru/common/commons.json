@@ -2,6 +2,10 @@
   "validators": {
     "required": "Это поле обязательно к заполнению"
   },
+  "notifications": {
+    "fetch-order-error": "Ваш Заказа не смог быть создан, повторите попытку позже",
+    "fetch-products-error": "Упс, что-то пошло не так! Попробуйте обновить страничку позже"
+  },
   "load-more-btn-label": "Загрузить ещё",
   "catalog-categories": {
     "all": "Все",
