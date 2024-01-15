@@ -41,6 +41,8 @@ export const fetchItemAction = createAsyncThunk<FetchedItem, string>(
       return result;
     } catch (error) {
       console.error("Error fetching product", error);
+      toast.error(i18next.t('common:commons.notifications.fetch-products-error'));
+      
       return rejectWithValue(error);
     }
   }
