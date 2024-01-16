@@ -5,6 +5,8 @@ import { Preloader, Product } from "components";
 import { useAppDispatch, useAppSelector } from "store";
 import { fetchItemAction, fetchedItemSelector } from "store/products";
 
+import "./product-page.scss";
+
 const ProductPage = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
@@ -17,7 +19,13 @@ const ProductPage = () => {
     }
   }, [id, dispatch]);
 
-  return !product ? <Preloader /> : <Product product={product} />;
+  return !product ? (
+    <div className="preloader-wrapper">
+      <Preloader />
+    </div>
+  ) : (
+    <Product product={product} />
+  );
 };
 
 export default ProductPage;

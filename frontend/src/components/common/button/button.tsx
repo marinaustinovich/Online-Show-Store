@@ -1,8 +1,9 @@
-import React, { ReactNode } from "react";
+import React, { MouseEventHandler, ReactNode, useCallback } from "react";
 
 import { classname } from "utils";
 
 import "./button.scss";
+import { useNavigate } from "react-router-dom";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
@@ -42,9 +43,26 @@ type ButtonLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
 
 export const ButtonLink = (props: ButtonLinkProps) => {
   const { children, className, active, badgeText, href, ...rest } = props;
+  const navigate = useNavigate();
+
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+      e.preventDefault();
+
+      if (href) {
+        navigate(href);
+      }
+    },
+    [navigate, href]
+  );
 
   return (
-    <a href={href} className={cn("", [cn("outline-primary")])} {...rest}>
+    <a
+      href={href}
+      className={cn("", [cn("outline-primary")])}
+      {...rest}
+      onClick={handleClick}
+    >
       {children}
       {badgeText}
     </a>
