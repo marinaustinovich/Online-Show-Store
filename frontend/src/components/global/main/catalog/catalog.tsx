@@ -84,7 +84,7 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
   const handleLoadMore = useCallback(() => {
     setOffset((prevOffset) => prevOffset + ITEMS_OFFSET_DEFAULT);
     setIsLoadingMore(true);
-    
+
     if (products.length > prevItemsLength) {
       setPrevItemsLength(products.length);
     }
@@ -110,7 +110,6 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
     [products.length, isLoadingMore]
   );
   
-
   return (
     <section className={cn("")}>
       <Title text={t("main.catalog.title")} />
