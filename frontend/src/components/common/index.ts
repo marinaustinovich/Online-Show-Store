@@ -18,3 +18,4 @@ export * from "./radio-buttons-group";
 export * from "./quantity-selector";
 export * from "./form-group";
 export * from "./checkbox";
+export * from "./error-block";

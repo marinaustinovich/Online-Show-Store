@@ -8,16 +8,20 @@ export const fetchedTopSalesSelector = createSelector(
   (products) => products.fetchTopSales.data ?? []
 );
 
-export const topSalesStatusSelector = (state: AppState) =>
-  state.products.fetchTopSales.status;
+export const topSalesStatusSelector =  createSelector(
+  [productsPageSelector],
+  (products) => products.fetchTopSales.status
+);
 
 export const fetchedItemsSelector = createSelector(
   [productsPageSelector],
   (products) => products.products
 );
 
-export const itemsStatusSelector = (state: AppState) =>
-  state.products.fetchItems.status;
+export const itemsStatusSelector = createSelector(
+  [productsPageSelector],
+  (products) => products.fetchItems.status
+)
 
 export const fetchedItemSelector = createSelector(
   [productsPageSelector],
@@ -33,6 +37,11 @@ export const fetchedCategoriesSelector = createSelector(
   [productsPageSelector],
   (products) => products.fetchCategories.data ?? []
 );
+
+export const fetchedCategoriesStatusSelector = createSelector(
+  [productsPageSelector],
+  (products) => products.fetchCategories.status 
+)
 
 export const activeCategoryIdSelector = createSelector(
   [productsPageSelector],

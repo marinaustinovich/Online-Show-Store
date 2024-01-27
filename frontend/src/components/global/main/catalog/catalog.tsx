@@ -6,6 +6,7 @@ import {
   Title,
   LoadMoreButton,
   CatalogCategories,
+  ErrorBlock,
 } from "components";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -95,40 +96,51 @@ export const Catalog = ({ isShowSearchForm = false }: CatalogProps) => {
     setPrevItemsLength(0);
   }, []);
 
-  const showPreloader = useMemo(
-    () => productsStatus === RequestStatus.PROCESSING,
-    [productsStatus]
-  );
-
-  const showEmptyBlock = useMemo(
-    () => productsStatus === RequestStatus.SUCCESS && !products.length,
-    [products.length, productsStatus]
-  );
+  const showPreloader = useMemo(() => productsStatus === RequestStatus.PROCESSING,[productsStatus]);
+  const showEmptyBlock = useMemo(() => productsStatus === RequestStatus.SUCCESS && !products.length,[products.length, productsStatus]);
 
   const showLoadMoreBtn = useMemo(
-    () => (products.length !== 0 && products.length % ITEMS_OFFSET_DEFAULT === 0) || isLoadingMore,
+    () =>
+      (products.length !== 0 && products.length % ITEMS_OFFSET_DEFAULT === 0) ||isLoadingMore,
     [products.length, isLoadingMore]
   );
   
+  const showErrorBlock = useMemo(() => productsStatus === RequestStatus.ERROR, [productsStatus]);
+
   return (
     <section className={cn("")}>
       <Title text={t("main.catalog.title")} />
-      {isShowSearchForm && ( <CatalogSearchForm onSearchSubmit={handleSearchSubmit} /> )}
-      <CatalogCategories onCategoryChange={handleCategoryChange} />
-
-      <>
-        <Row>
-          {products?.map((product) => <Card card={product} key={product.id} />)}
-
-          {showEmptyBlock && (
-            <div className={cn("empty-block")}>
-              {t("main.catalog.empty-block")}
-            </div>
+      {showErrorBlock ? (
+        <ErrorBlock onReload={handleLoadMore}/>
+      ) : (
+        <>
+          {isShowSearchForm && (
+            <CatalogSearchForm onSearchSubmit={handleSearchSubmit} />
           )}
-        </Row>
-        {showPreloader && <Preloader />}
-        {showLoadMoreBtn && ( <LoadMoreButton onClick={handleLoadMore} isDisabled={showPreloader} /> )}
-      </>
+          <CatalogCategories onCategoryChange={handleCategoryChange} />
+
+          <>
+            <Row>
+              {products?.map((product) => (
+                <Card card={product} key={product.id} />
+              ))}
+
+              {showEmptyBlock && (
+                <div className={cn("empty-block")}>
+                  {t("main.catalog.empty-block")}
+                </div>
+              )}
+            </Row>
+            {showPreloader && <Preloader />}
+            {showLoadMoreBtn && !showPreloader && (
+              <LoadMoreButton
+                onClick={handleLoadMore}
+                isDisabled={showPreloader}
+              />
+            )}
+          </>
+        </>
+      )}
     </section>
   );
 };

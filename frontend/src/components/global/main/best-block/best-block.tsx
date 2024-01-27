@@ -1,8 +1,4 @@
-import {
-  fetchTopSalesAction,
-  fetchedTopSalesSelector,
-  topSalesStatusSelector,
-} from "store/products";
+import { fetchTopSalesAction, fetchedTopSalesSelector, topSalesStatusSelector } from "store/products";
 import { Card, Preloader, Row, Title, TopSalesSection } from "components";
 import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,10 +17,7 @@ export const BestBlock = () => {
   }, [dispatch]);
 
   const showComponent = useMemo(
-    () =>
-      topSalesStatus === RequestStatus.PROCESSING ||
-      topSalesProducts.length > 0,
-    [topSalesProducts.length, topSalesStatus]
+    () =>topSalesStatus === RequestStatus.PROCESSING ||topSalesProducts.length > 0, [topSalesProducts.length, topSalesStatus]
   );
 
   return showComponent ? (

@@ -1,5 +1,5 @@
-import { classname } from "utils";
-import { UnOrderedList } from "components";
+import { RequestStatus, classname } from "utils";
+import { Preloader, UnOrderedList } from "components";
 import React, { useCallback, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -10,6 +10,7 @@ import {
   activeCategoryIdSelector,
   fetchCategoriesAction,
   fetchedCategoriesSelector,
+  fetchedCategoriesStatusSelector,
   searchProductSelector,
 } from "store/products";
 
@@ -31,6 +32,7 @@ export const CatalogCategories = ({ onCategoryChange }: Props) => {
   const activeCategory = useAppSelector(activeCategoryIdSelector);
   const searchProduct = useAppSelector(searchProductSelector);
   const categories = useAppSelector(fetchedCategoriesSelector);
+  const fetchedCategoriesStatus = useAppSelector(fetchedCategoriesStatusSelector);
 
   useEffect(() => {
     dispatch(fetchCategoriesAction());
@@ -90,5 +92,12 @@ export const CatalogCategories = ({ onCategoryChange }: Props) => {
     return [allCategoryLink, ...categoryLinks];
   }, [categories, activeCategory, handleCategoryClick, t]);
 
-  return <UnOrderedList className={cn()} list={categoriesList} />;
+  const showPreloader = useMemo(() => fetchedCategoriesStatus === RequestStatus.PROCESSING,[fetchedCategoriesStatus]);
+
+  return (
+    <>
+     {showPreloader && <Preloader />}
+      <UnOrderedList className={cn()} list={categoriesList} />;
+    </>
+  );
 };
