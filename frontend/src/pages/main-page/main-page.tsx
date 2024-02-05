@@ -1,11 +1,11 @@
-import { BestBlock, Catalog } from "components";
-import React from "react";
+import { BestBlock, Catalog } from 'components';
+import React from 'react';
 
 const MainPage = () => (
-  <>
-    <BestBlock />
-    <Catalog />
-  </>
+    <>
+        <BestBlock />
+        <Catalog />
+    </>
 );
 
 export default MainPage;

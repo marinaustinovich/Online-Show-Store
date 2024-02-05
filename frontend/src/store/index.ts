@@ -1,27 +1,26 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-import { productsReducer } from "./products";
+import { productsReducer } from './products';
 
 const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["search"],
+    key: 'root',
+    storage,
+    whitelist: ['search'],
 };
 
 const rootReducer = combineReducers({
-  products: productsReducer,
+    products: productsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }),
-  devTools: process.env.NODE_ENV !== "production",
+    reducer: persistedReducer,
+    middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false }),
+    devTools: process.env.NODE_ENV !== 'production',
 });
 
 export const persistor = persistStore(store);

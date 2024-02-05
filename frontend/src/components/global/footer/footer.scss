@@ -1,77 +1,77 @@
 .footer {
-  padding: 0 25px;
-  &-pay {
-    display: flex;
-    justify-content: space-between;
-    margin: 12px auto 0;
+    padding: 0 25px;
+    &-pay {
+        display: flex;
+        justify-content: space-between;
+        margin: 12px auto 0;
 
-    &-systems {
-      width: 46px;
-      height: 28px;
-      border: 2px solid #ffffff;
-      border-radius: 8px;
-      background-color: #ffffff;
-      background-repeat: no-repeat;
-      background-image: url("../../../../public/img/footer-sprite.png");
-      &-paypal {
-        background-position: -2px -6px;
-      }
-      &-master-card {
-        background-position: -54px -8px;
-      }
-      &-visa {
-        background-position: -104px -8px;
-      }
-      &-yandex {
-        background-position: -154px -8px;
-      }
-      &-webmoney {
-        background-position: -2px -46px;
-      }
-      &-qiwi {
-        background-position: -52px -46px;
-      }
-    }
-    &-systems:not(:first-child) {
-      margin-left: 5px;
-    }
-  }
-
-  &-social {
-    &-links {
-      margin-top: 10px;
-    }
-    &-link {
-      display: inline-block;
-      width: 36px;
-      height: 36px;
-      margin: 0 5px;
-      border-radius: 50%;
-      background-repeat: no-repeat;
-      background-image: url("../../../../public/img/footer-sprite.png");
-    }
-    &-link-twitter {
-      background-position: -107px -42px;
-    }
-    &-link-vk {
-      background-position: -157px -42px;
-    }
-    &-link:hover {
-      cursor: pointer;
-    }
-  }
-
-  &-copyright {
-    font-size: 0.8em;
-  }
-
-  &-contacts {
-    &-phone {
-      display: block;
+        &-systems {
+            width: 46px;
+            height: 28px;
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+            background-color: #ffffff;
+            background-repeat: no-repeat;
+            background-image: url('../../../../public/img/footer-sprite.png');
+            &-paypal {
+                background-position: -2px -6px;
+            }
+            &-master-card {
+                background-position: -54px -8px;
+            }
+            &-visa {
+                background-position: -104px -8px;
+            }
+            &-yandex {
+                background-position: -154px -8px;
+            }
+            &-webmoney {
+                background-position: -2px -46px;
+            }
+            &-qiwi {
+                background-position: -52px -46px;
+            }
+        }
+        &-systems:not(:first-child) {
+            margin-left: 5px;
+        }
     }
 
-    &-email {
-      display: block;
+    &-social {
+        &-links {
+            margin-top: 10px;
+        }
+        &-link {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            background-image: url('../../../../public/img/footer-sprite.png');
+        }
+        &-link-twitter {
+            background-position: -107px -42px;
+        }
+        &-link-vk {
+            background-position: -157px -42px;
+        }
+        &-link:hover {
+            cursor: pointer;
+        }
     }
-  }
+
+    &-copyright {
+        font-size: 0.8em;
+    }
+
+    &-contacts {
+        &-phone {
+            display: block;
+        }
+
+        &-email {
+            display: block;
+        }
+    }
 }

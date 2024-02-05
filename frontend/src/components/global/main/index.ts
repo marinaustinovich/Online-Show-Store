@@ -1,2 +1,2 @@
-export * from "./best-block";
-export * from "./catalog";
+export * from './best-block';
+export * from './catalog';

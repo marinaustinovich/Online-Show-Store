@@ -1,1 +1,1 @@
-export * from "./product-size-and-quality";
+export * from './product-size-and-quality';

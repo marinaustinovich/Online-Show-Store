@@ -1,8 +1,8 @@
 {
-  "navbar": {
-    "main-label": "Главная",
-    "catalog-label": "Каталог",
-    "about-store-label": "О магазине",
-    "contacts-label": "Контакты"
-  }
+    "navbar": {
+        "main-label": "Главная",
+        "catalog-label": "Каталог",
+        "about-store-label": "О магазине",
+        "contacts-label": "Контакты"
+    }
 }

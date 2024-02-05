@@ -25,5 +25,4 @@ export const initializeI18next = () => {
             lookupCookie: 'language',
         },
     });
-}
-
+};

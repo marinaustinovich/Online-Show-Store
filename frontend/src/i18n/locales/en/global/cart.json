@@ -1,27 +1,27 @@
 {
-  "cart-section": {
-    "title": "Cart",
-    "empty-block": "There are no items in your cart",
-    "table": {
-      "number": "#",
-      "title": "Title",
-      "size": "Size",
-      "count": "Count",
-      "price": "Cost",
-      "total": "Total",
-      "actions": "Actions",
-      "delete": "Delete",
-      "ru-currency-label": "RUB",
-      "total-price-label": "Total Price"
+    "cart-section": {
+        "title": "Cart",
+        "empty-block": "There are no items in your cart",
+        "table": {
+            "number": "#",
+            "title": "Title",
+            "size": "Size",
+            "count": "Count",
+            "price": "Cost",
+            "total": "Total",
+            "actions": "Actions",
+            "delete": "Delete",
+            "ru-currency-label": "RUB",
+            "total-price-label": "Total Price"
+        }
+    },
+    "order-section": {
+        "title": "Place an order",
+        "phone-label": "Phone",
+        "phone-placeholder": "Your phone",
+        "address-label": "Shipping address",
+        "address-placeholder": "Shipping address",
+        "agreement-label": "I agree with the delivery rules",
+        "design-btn": "Design"
     }
-  },
-  "order-section": {
-    "title": "Place an order",
-    "phone-label": "Phone",
-    "phone-placeholder": "Your phone",
-    "address-label": "Shipping address",
-    "address-placeholder": "Shipping address",
-    "agreement-label": "I agree with the delivery rules",
-    "design-btn": "Design"
-  }
 }

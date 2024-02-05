@@ -1,19 +1,17 @@
-import React, { ChangeEvent, KeyboardEvent } from "react";
+import React, { ChangeEvent, KeyboardEvent } from 'react';
 
-import { classname } from "utils";
+import { classname } from 'utils';
 
-import "./input.scss";
+import './input.scss';
 
 type InputProps = {
-  placeholder?: string;
-  value: string;
-  id?: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onKeyPress?: (e: KeyboardEvent<HTMLInputElement>) => void;
+    placeholder?: string;
+    value: string;
+    id?: string;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    onKeyPress?: (e: KeyboardEvent<HTMLInputElement>) => void;
 };
 
-const cn = classname("form-control");
+const cn = classname('form-control');
 
-export const Input = ({ ...props }: InputProps) => (
-  <input className={cn()} {...props} />
-);
+export const Input = ({ ...props }: InputProps) => <input className={cn()} {...props} />;

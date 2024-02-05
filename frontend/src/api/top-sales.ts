@@ -1,17 +1,17 @@
-import { axios } from "utils";
+import { axios } from 'utils';
 
 type Image = string;
 
 export type ProductItem = {
-  category: number;
-  id: number;
-  images: Image[];
-  price: number;
-  title: string;
+    category: number;
+    id: number;
+    images: Image[];
+    price: number;
+    title: string;
 };
 
 export const fetchTopSales = async () => {
-  const result = await axios.get("/top-sales");
+    const result = await axios.get('/top-sales');
 
-  return result.data as ProductItem[];
+    return result.data as ProductItem[];
 };

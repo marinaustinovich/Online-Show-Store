@@ -1,13 +1,13 @@
 {
-  "table": {
-    "sku": "Article",
-    "manufacturer": "Manufacturer",
-    "color": "Color",
-    "material": "Materials",
-    "season": "Season",
-    "reason": "Occasion"
-  },
-  "sizes-label": "Sizes available: ",
-  "count-label": "Count: ",
-  "buy-btn-label": "Add to cart"
+    "table": {
+        "sku": "Article",
+        "manufacturer": "Manufacturer",
+        "color": "Color",
+        "material": "Materials",
+        "season": "Season",
+        "reason": "Occasion"
+    },
+    "sizes-label": "Sizes available: ",
+    "count-label": "Count: ",
+    "buy-btn-label": "Add to cart"
 }

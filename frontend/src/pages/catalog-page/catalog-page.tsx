@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { Catalog } from "components";
+import { Catalog } from 'components';
 
 const CatalogPage = () => <Catalog isShowSearchForm={true} />;
 export default CatalogPage;

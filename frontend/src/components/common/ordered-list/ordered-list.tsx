@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
 export type ListItem = {
-  text: string;
+    text: string;
 };
 
 type Props = {
-  list: ListItem[];
+    list: ListItem[];
 };
 
 export const OrderedList = ({ list }: Props) => (
-  <ol>
-    {list.map((item, index) => (
-      <li key={index}>{item.text}</li>
-    ))}
-  </ol>
+    <ol>
+        {list.map((item, index) => (
+            <li key={index}>{item.text}</li>
+        ))}
+    </ol>
 );

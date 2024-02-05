@@ -21,7 +21,6 @@ export type Response<D = null> = {
     message?: string;
 };
 
-
 export type RequestWithStatus<D = null> = {
     status: RequestStatus;
     error: any | null;
@@ -78,7 +77,6 @@ export const addAsyncThunkHandlers = <A, B, C>(builder: ActionReducerMapBuilder<
             // @ts-ignore
             state[actionName] = requestFailed(action.payload.message, action.payload.code);
         });
-       
 };
 
 export const composeBuilder = <A>(builder: ActionReducerMapBuilder<A>, funcs: Array<ReturnType<typeof createAsyncThunk<any, any>>>) => {

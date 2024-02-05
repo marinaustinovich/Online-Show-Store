@@ -1,22 +1,22 @@
 {
-  "validators": {
-    "required": "This field is required"
-  },
-  "notifications": {
-    "fetch-order-error": "Your Order could not be created, please try again later",
-    "fetch-products-error": "Oops, something went wrong! Try refreshing the page later"
-  },
-  "load-more-btn-label": "Load more",
-  "category-directory": {
-    "all": "All",
-    "women-shoes": "Women's shoes",
-    "men-shoes": "Men's shoes",
-    "unisex-shoes": "Unisex shoes",
-    "children-shoes": "Children's shoes"
-  },
-  "error-block": {
-    "reload-btn": "Retry",
-    "title": "Oops! Something went wrong!",
-    "text": "Please try again later"
-  }
+    "validators": {
+        "required": "This field is required"
+    },
+    "notifications": {
+        "fetch-order-error": "Your Order could not be created, please try again later",
+        "fetch-products-error": "Oops, something went wrong! Try refreshing the page later"
+    },
+    "load-more-btn-label": "Load more",
+    "category-directory": {
+        "all": "All",
+        "women-shoes": "Women's shoes",
+        "men-shoes": "Men's shoes",
+        "unisex-shoes": "Unisex shoes",
+        "children-shoes": "Children's shoes"
+    },
+    "error-block": {
+        "reload-btn": "Retry",
+        "title": "Oops! Something went wrong!",
+        "text": "Please try again later"
+    }
 }

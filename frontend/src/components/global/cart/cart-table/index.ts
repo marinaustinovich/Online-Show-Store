@@ -1,1 +1,1 @@
-export * from "./cart-table";
+export * from './cart-table';

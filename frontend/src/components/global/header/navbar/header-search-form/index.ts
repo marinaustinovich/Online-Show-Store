@@ -1,1 +1,1 @@
-export * from './header-controls-search-form'
+export * from './header-controls-search-form';

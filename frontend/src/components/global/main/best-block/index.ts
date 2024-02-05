@@ -1,1 +1,1 @@
-export * from "./best-block";
+export * from './best-block';

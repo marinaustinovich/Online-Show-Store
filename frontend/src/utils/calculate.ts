@@ -6,4 +6,4 @@
  */
 export const calculateTotalPrice = (count: number, price: number) => {
     return count * price;
-  };
+};

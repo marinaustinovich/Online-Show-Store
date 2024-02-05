@@ -1,12 +1,12 @@
-import { axios } from "utils";
+import { axios } from 'utils';
 
 export type Category = {
-  id: number;
-  title: string;
+    id: number;
+    title: string;
 };
 
 export const fetchCategories = async () => {
-  const result = await axios.get("/categories");
+    const result = await axios.get('/categories');
 
-  return result.data;
+    return result.data;
 };

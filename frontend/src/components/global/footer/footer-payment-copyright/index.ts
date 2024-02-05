@@ -1,1 +1,1 @@
-export * from "./footer-payment-copyright";
+export * from './footer-payment-copyright';

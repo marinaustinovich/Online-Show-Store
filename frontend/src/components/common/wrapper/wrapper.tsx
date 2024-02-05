@@ -1,10 +1,7 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 type Props = {
-  children: ReactNode;
+    children: ReactNode;
 };
 
-export const Wrapper = ({ children }: Props) => (
-  <div className="row">{children}</div>
-);
-
+export const Wrapper = ({ children }: Props) => <div className='row'>{children}</div>;

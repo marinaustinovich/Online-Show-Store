@@ -1,9 +1,9 @@
-import commons from "./commons.json";
-import card from "./card.json";
+import commons from './commons.json';
+import card from './card.json';
 
 export const common = {
-  commons,
-  card,
+    commons,
+    card,
 };
 
 export default common;

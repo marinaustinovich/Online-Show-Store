@@ -1,11 +1,6 @@
 module.exports = {
-    parser: "@typescript-eslint/parser",
-    extends: [
-      "plugin:react/recommended",
-      'plugin:@typescript-eslint/eslint-recommended',
-      'plugin:@typescript-eslint/recommended',
-      'prettier',
-    ],
+    parser: '@typescript-eslint/parser',
+    extends: ['plugin:react/recommended', 'plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
     env: {
         browser: true,
         node: true,
@@ -21,9 +16,9 @@ module.exports = {
         },
     },
     parserOptions: {
-      ecmaFeatures: {
-        jsx: true
-      }
+        ecmaFeatures: {
+            jsx: true,
+        },
     },
     rules: {
         quotes: ['warn', 'single', { avoidEscape: true }],
@@ -155,5 +150,4 @@ module.exports = {
         '@next/next/no-img-element': ['off'],
         'prettier/prettier': ['error', { endOfLine: 'auto' }],
     },
-  };
-  
+};

@@ -1,19 +1,19 @@
 {
-  "navigation": {
-    "title": "Информация",
-    "catalog-label": "Каталог",
-    "about-store-label": "О магазине",
-    "contacts-label": "Контакты"
-  },
-  "contacts": {
-    "title": "Контакты:",
-    "phone": "  +7 495 79 03 5 03",
-    "working-hours": "Ежедневно: с 09-00 до 21-00",
-    "email": " office@bosanoga.ru"
-  },
-  "payment-copyright": {
-    "title": "Принимаем к оплате:",
-    "copyright": "2009-2019 © BosaNoga.ru — модный интернет-магазин обуви и аксессуаров. Все права защищены.",
-    "delivery": "Доставка по всей России!"
-  }
+    "navigation": {
+        "title": "Информация",
+        "catalog-label": "Каталог",
+        "about-store-label": "О магазине",
+        "contacts-label": "Контакты"
+    },
+    "contacts": {
+        "title": "Контакты:",
+        "phone": "  +7 495 79 03 5 03",
+        "working-hours": "Ежедневно: с 09-00 до 21-00",
+        "email": " office@bosanoga.ru"
+    },
+    "payment-copyright": {
+        "title": "Принимаем к оплате:",
+        "copyright": "2009-2019 © BosaNoga.ru — модный интернет-магазин обуви и аксессуаров. Все права защищены.",
+        "delivery": "Доставка по всей России!"
+    }
 }

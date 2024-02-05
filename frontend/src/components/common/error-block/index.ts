@@ -1,1 +1,1 @@
-export * from './error-block'
+export * from './error-block';

@@ -1,1 +1,1 @@
-export * from "./radio-buttons-group";
+export * from './radio-buttons-group';

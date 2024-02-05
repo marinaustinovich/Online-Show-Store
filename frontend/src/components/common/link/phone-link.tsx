@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 
-import { classname } from "utils";
+import { classname } from 'utils';
 
 type Props = {
-  phone: string;
-  className?: string;
-  label?: string;
+    phone: string;
+    className?: string;
+    label?: string;
 };
 
-const cn = classname("phone-link");
+const cn = classname('phone-link');
 
 export const PhoneLink = ({ phone, className, label }: Props) => (
-  <>
-    {label}
-    <a className={cn("", [className])} href={`tel:${phone}`}>
-      {phone}
-    </a>
-  </>
+    <>
+        {label}
+        <a className={cn('', [className])} href={`tel:${phone}`}>
+            {phone}
+        </a>
+    </>
 );

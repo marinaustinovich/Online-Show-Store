@@ -1,3 +1,3 @@
-export * from "./cart-section";
-export * from "./cart-table";
-export * from './order-section'
+export * from './cart-section';
+export * from './cart-table';
+export * from './order-section';

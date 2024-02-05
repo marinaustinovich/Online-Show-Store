@@ -1,1 +1,1 @@
-export * from "./catalog-search-form";
+export * from './catalog-search-form';
